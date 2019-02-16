@@ -6,52 +6,61 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: null,
-      fetching: true
+      error: '',
+      charities: [],
+      charityRequestState: 'INIT',
     };
   }
 
   componentDidMount() {
-    fetch('/api')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`status ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(json => {
-        this.setState({
-          message: json.message,
-          fetching: false
+    this.setState({charityRequestState: 'FETCHING' }, () => {
+      fetch('/api/v1/charity')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(response.error);
+          }
+          return response.json();
+        })
+        .then(json => {
+          this.setState({
+            error: '',
+            charities: json.data,
+            charityRequestState: 'DONE',
+          });
+        }).catch(e => {
+          console.error(e);
+          this.setState({
+            error: `Failed to fetch charities: ${e}`,
+            charityRequestState: 'ERROR',
+          });
         });
-      }).catch(e => {
-        this.setState({
-          message: `API call failed: ${e}`,
-          fetching: false
-        });
-      })
+    });
   }
 
   render() {
+    const { charityRequestState, charities, error } = this.state;
+    let content;
+
+    switch(charityRequestState) {
+      case 'INIT':
+      case 'FETCHING':
+        content = (<p>Loading...</p>);
+        break;
+      case 'DONE':
+        content = (<p>Charities loaded!</p>);
+        break;
+      case 'ERROR':
+        content = (<p>{error}</p>);
+        break;
+      default:
+        content = (<p>Default? Should never happen</p>);
+    }
+
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          { process.env.NODE_ENV === 'production' ?
-              <p>
-                Charity Watchdog
-              </p>
-            : <p>
-                Edit <code>src/App.js</code> and save to reload.
-              </p>
-          }
-          <p>
-            {'« '}<strong>
-              {this.state.fetching
-                ? 'Fetching message from API'
-                : this.state.message}
-            </strong>{' »'}
-          </p>
+          {content}
         </header>
       </div>
     );
