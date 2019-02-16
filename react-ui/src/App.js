@@ -47,7 +47,7 @@ class App extends Component {
         content = (<p>Loading...</p>);
         break;
       case 'DONE':
-        content = charities.map(charity => <p>{charity.name}</p>);
+        content = charities.map(charity => <p>{charity.name} <strong>{charity.wallet_address}</strong></p>);
         break;
       case 'ERROR':
         content = (<p>{error}</p>);
