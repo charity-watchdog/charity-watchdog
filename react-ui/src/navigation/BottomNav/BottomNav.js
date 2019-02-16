@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import './BottomNav.css';
 
 class BottomNav extends Component {
-    handleMenuClick = (newState) => {
-        return () => {
-            this.props.navigationActions.changeView(newState);
-        }
+    handleNavClick = (newView) => {
+        return () => { this.props.changeView(newView); }
     }
 
     render() {
@@ -17,41 +15,46 @@ class BottomNav extends Component {
         return (
             <div className="bottom-nav">
                 <div
-                    className="menu-section"
-                    onClick={this.handleMenuClick('BROWSE')}
+                    className={
+                        view === 'BROWSE' ?
+                            "menu-section blue"
+                        :
+                            "menu-section"
+                    }
+                    onClick={this.handleNavClick('BROWSE')}
                 >
                     <div className="menu-item-container">
                         <div className="menu-icon material-icons">account_balance_wallet</div>
                         <div className="menu-title">
-                            {view ==="Balance" && <div className="highlight" />}
-                            <div className="title">balance</div>
+                            {view === "BROWSE" && <div className="highlight" />}
+                            <div className="title">browse</div>
                         </div>
                     </div>
                 </div>
                 <div
-                    className={view === "Search" ?
-                            "menu-section purple"
+                    className={
+                        view === 'YOUR_CHARITY' ?
+                            "menu-section blue"
                         :
                             "menu-section"
                     }
-                    onClick={this.handleMenuClick('Search')}
+                    onClick={this.handleNavClick('YOUR_CHARITY')}
                 >
                     <div className="menu-item-container">
-                        <div className="menu-icon material-icons">search</div>
+                        <div className="menu-icon material-icons">accessibility_new</div>
                         <div className="menu-title">
-                            {view ==="Search" && <div className="highlight" />}
-                            <div className="title">search</div>
+                            {view === "YOUR_CHARITY" && <div className="highlight" />}
+                            <div className="title">your charity</div>
                         </div>
                     </div>
                 </div>
-                {this.renderActivationRequests()}
             </div>
         );
     }
 }
 
 BottomNav.propTypes = {
-    navigationActions: PropTypes.object,
+    changeView: PropTypes.func,
     view: PropTypes.string
 };
 

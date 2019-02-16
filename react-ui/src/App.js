@@ -16,6 +16,7 @@ class App extends Component {
             view: 'INTRO', // 'BROWSE', 'YOUR_CHARITY'
             charityInBrowse: '', //  by ETH Address. If own charity -> switch to 'YOUR_CHARITY' view
             searchTerms: '',
+            searchBarOpen: false,
             modalOpen: false
         };
     }
@@ -80,7 +81,8 @@ class App extends Component {
                 </header>
                 <BottomNav
                     view={view}
-                >
+                    changeView={this.changeView}
+                />
             </div>
         );
     }
