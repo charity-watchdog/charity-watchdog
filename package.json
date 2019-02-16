@@ -1,6 +1,6 @@
 {
   "name": "charity-watchdog",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "Using the Ethereum network to bring transparency and accountability to charity spends",
   "engines": {
     "node": "10.15.1",
