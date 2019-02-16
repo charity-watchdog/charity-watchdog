@@ -1,0 +1,30 @@
+{
+  "name": "charity-watchdog",
+  "version": "1.0.0",
+  "description": "Using the Ethereum network to bring transparency and accountability to charity spends",
+  "engines": {
+    "node": "10.15.1"
+  },
+  "scripts": {
+    "start": "node server",
+    "heroku-postbuild": "cd react-ui/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "react-ui/node_modules"
+  ],
+  "dependencies": {
+    "express": "^4.16.4",
+    "morgan": "^1.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peteygao/charity-watchdog.git"
+  },
+  "keywords": [
+    "charity",
+    "watchdog"
+  ],
+  "license": "MIT",
+  "devDependencies": {}
+}

@@ -1,0 +1,21 @@
+{
+  "name": "charity-watchdog",
+  "description": "Using the Ethereum network to bring transparency and accountability to charity spends",
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
