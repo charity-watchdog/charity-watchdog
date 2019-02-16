@@ -10,6 +10,8 @@ const isDev = process.env.NODE_ENV !== 'production';
 const PORT = process.env.PORT || 5000;
 const databaseUrl = process.env.DATABASE_URL || new String(execSync('heroku config:get DATABASE_URL -a charity-watchdog')).trim();
 
+const pool = new Pool({ connectionString: databaseUrl, ssl: true, statement_timeout: 25 });
+
 // Multi-process to utilize all CPU cores.
 if (!isDev && cluster.isMaster) {
   console.error(`Node cluster master ${process.pid} is running`);
