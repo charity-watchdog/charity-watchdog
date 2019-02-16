@@ -8,8 +8,7 @@ const { execSync } = require('child_process');
 
 const isDev = process.env.NODE_ENV !== 'production';
 const PORT = process.env.PORT || 5000;
-
-const databaseUrl = new String(execSync('heroku config:get DATABASE_URL -a charity-watchdog')).trim();
+const databaseUrl = process.env.DATABASE_URL || new String(execSync('heroku config:get DATABASE_URL -a charity-watchdog')).trim();
 
 // Multi-process to utilize all CPU cores.
 if (!isDev && cluster.isMaster) {
