@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Using the Ethereum network to bring transparency and accountability to charity spends",
   "engines": {
-    "node": "10.15.1"
+    "node": "10.15.1",
+    "npm": "6.8.0"
   },
   "scripts": {
     "start": "node server",
