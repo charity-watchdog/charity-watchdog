@@ -17,7 +17,7 @@ class App extends Component {
       fetch('/api/v1/charity')
         .then(response => {
           if (!response.ok) {
-            throw new Error(response.error);
+            throw new Error(response.json().error);
           }
           return response.json();
         })

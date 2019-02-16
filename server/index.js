@@ -5,6 +5,7 @@ const numCPUs = require('os').cpus().length;
 const morgan = require('morgan');
 const { Pool } = require('pg');
 const { execSync } = require('child_process');
+const Meerkat = require('./meerkat');
 
 const isDev = process.env.NODE_ENV !== 'production';
 const PORT = process.env.PORT || 5000;
@@ -43,7 +44,20 @@ if (!isDev && cluster.isMaster) {
   app.get('/api/v1/charity', (req, res) => {
     res.set('Content-Type', 'application/json');
 
-    pool.query('SELECT * FROM charities', (err, queryRes) => {
+    pool.query('SELECT id, name, description, wallet_address FROM charities', (err, queryRes) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send({ error: err });
+      } else {
+        res.send({ data: queryRes.rows });
+      }
+    });
+  });
+
+  app.get('/api/v1/charity/:charityID', (req, res) => {
+    res.set('Content-Type', 'application/json');
+
+    pool.query('SELECT * FROM transactions WHERE charity_id = $1', (err, queryRes) => {
       if (err) {
         console.error(err);
         res.status(500).send({ error: err });
@@ -57,20 +71,37 @@ if (!isDev && cluster.isMaster) {
     res.set('Content-Type', 'application/json');
     const { name, description, walletAddress } = req.body;
 
-    pool.query(
-      `INSERT INTO charities
-        (name, description, wallet_address)
-        VALUES
-        ($1, $2, $3)
-        RETURNING id`,
-      [name, description, walletAddress],
-      (err, queryRes) => {
-        if (err) {
-          res.status(500).send({ error: err });
-        } else {
-          res.send({ data: queryRes.rows[0].charityID });
+    Meerkat
+      .createAddressSubscription(walletAddress)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.status);
         }
-    });
+
+        console.log(`Meerkat.createAddressSubscription response body: ${response.body}`)
+        const meerkatSubID = response.body;
+
+        pool.query(
+          `INSERT INTO charities
+            (name, description, wallet_address, meerkat_subscription_id)
+            VALUES
+            ($1, $2, $3, $4)
+            RETURNING id`,
+          [name, description, walletAddress, meerkatSubID],
+          (err, queryRes) => {
+            if (err) {
+              res.status(500).send({ error: err });
+            } else {
+              res.send({ data: queryRes.rows[0].charityID });
+            }
+        });
+      })
+    ;
+  });
+
+  app.get('/webhook/v1/address', (req, res) => {
+    console.log(`Received a webhook: ${req.body}`);
+    res.status(200).end();
   });
 
   // All remaining requests return the React app, so it can handle routing.
