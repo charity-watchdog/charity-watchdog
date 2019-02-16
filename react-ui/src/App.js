@@ -39,7 +39,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           { process.env.NODE_ENV === 'production' ?
               <p>
-                Charity Watchdog, coming soon.
+                Charity Watchdog
               </p>
             : <p>
                 Edit <code>src/App.js</code> and save to reload.
