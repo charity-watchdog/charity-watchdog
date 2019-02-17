@@ -111,6 +111,26 @@ if (!isDev && cluster.isMaster) {
         ;
     });
 
+    app.put('/api/v1/transaction/:transactionID', (req, res) => {
+        const { description, proofImage } = req.body;
+
+        pool.query(
+            `UPDATE transactions SET
+            (description, proof)
+            =
+            ($1, $2)
+            WHERE id = $3`,
+            [description, proofImage, req.params.transactionID],
+            (err, queryRes) => {
+                if (err) {
+                    res.status(500).send({ error: err });
+                } else {
+                    res.status(200).end();
+                }
+            }
+        );
+    });
+
     app.get('/webhook/v1/address', (req, res) => {
 
         console.log(req.body);

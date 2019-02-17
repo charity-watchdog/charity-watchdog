@@ -11,6 +11,29 @@ class TransactionFullView extends Component {
         );
     }
 
+    submitProof = () => {
+        const transactionID = this.props.transaction.id;
+        const file = this._input.files[0];
+        const reader = new FileReader();
+
+        reader.addEventListener('load', () => {
+            fetch(`/api/v1/transaction/${transactionID}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    "description": this._textarea.value,
+                    "proofImage": reader.result,
+                }),
+            });
+        }, false);
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+
     render() {
         const { ownTransaction, transaction } = this.props;
 
@@ -36,14 +59,24 @@ class TransactionFullView extends Component {
                     </div>
                     <div>
                         <label className="description-label">
-                            <textarea name="description" />
+                            <textarea
+                                ref={(element) => this._textarea = element}
+                                name="description"
+                                onChange={this.handleDescriptionChange}
+                            />
                         </label>
                     </div>
                     <div>
                         <label className="proof-image">
-                            <input type="file" title="proof-image" name="proof-image" />
+                            <input
+                                ref={(element) => this._input = element}
+                                type="file"
+                                title="proof-image"
+                                name="proof-image"
+                            />
                         </label>
                     </div>
+                    <button className="submit-proof" onClick={this.submitProof} />
                 </div>
             );
         } else {
@@ -68,7 +101,7 @@ class TransactionFullView extends Component {
                     <div>
                         <span>{transaction.description}</span>
                     </div>
-                        <img src={transaction.proof} alt="Image proof of spend" />
+                        <img src={transaction.proof} alt="Proof of spend" />
                 </div>
             );
         }

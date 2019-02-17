@@ -27,10 +27,12 @@ class CharityFullView extends Component {
                 content = <p>Loading...</p>;
                 break;
             case 'DONE':
+                let transactionsContent;
+
                 if (transactions.length === 0) {
-                    content = <p>This charity does not have any spends yet.</p>
+                    transactionsContent = <p>This charity does not have any spends yet.</p>
                 } else {
-                    content = transactions.map((transaction) => {
+                    transactionsContent = transactions.map((transaction) => {
                         return (
                             <TransactionPreview
                                 key={transaction.id}
@@ -45,6 +47,25 @@ class CharityFullView extends Component {
                         );
                     });
                 }
+
+                content = (
+                    <Fragment>
+                        <div className="charity-balance-container">
+                            <div className="section-description">balance</div>
+                            <div className="amount-container">
+                                <div className="balance-amount">{(this.props.balanceInView * 126000).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
+                                <button className="solid blue">donate</button>
+                            </div>
+                            <div className="balance-in-eth">~ {this.props.balanceInView * 1000} ETH</div>
+                        </div>
+                        <div className="transactions-container">
+                            <div className="section-description transactions">transactions</div>
+                            <div className="transactions-list">
+                                {transactionsContent}
+                            </div>
+                        </div>
+                    </Fragment>
+                );
                 break;
             case 'ERROR':
                 content = (<p>{error}</p>);
@@ -77,20 +98,7 @@ class CharityFullView extends Component {
                 <p className="charity-description">
                     {description}
                 </p>
-                <div className="charity-balance-container">
-                    <div className="section-description">balance</div>
-                    <div className="amount-container">
-                        <div className="balance-amount">$3.45</div>
-                        <button className="solid blue">donate</button>
-                    </div>
-                    <div className="balance-in-eth">~ 0.344 ETH</div>
-                </div>
-                <div className="transactions-container">
-                    <div className="section-description transactions">transactions</div>
-                    <div className="transactions-list">
-                        {content}
-                    </div>
-                </div>
+                {content}
             </div>
         );
     }
@@ -117,6 +125,7 @@ CharityFullView.propTypes = {
     description: PropTypes.string,
     walletAddress: PropTypes.string,
     missingProof: PropTypes.string,
+    balanceInView: PropTypes.string,
 };
 
 export default CharityFullView;
