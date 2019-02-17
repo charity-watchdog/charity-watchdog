@@ -16,7 +16,7 @@
     padding: 0 8px;
     margin-bottom: 4px;
     font-size: 22px;
-    color: #007DAC;
+    color: #00ADEE;
     font-family: 'Ubuntu', sans-serif;
     font-weight: 700;
     text-overflow: ellipsis;
@@ -27,7 +27,7 @@
 .charity-full-view-container .charity-description {
     width: 100%;
     padding: 0 8px;
-    margin-bottom: 12px;
+    margin-bottom: 24px;
     font-size: 12px;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -36,6 +36,12 @@
 
 .charity-full-view-container .charity-balance-container {
     padding: 0 8px;
+    margin-bottom: 24px;
+}
+
+.charity-full-view-container .transactions-container {
+    padding: 0 8px;
+    margin-bottom: 24px;
 }
 
 .charity-full-view-container .section-description {
@@ -43,7 +49,26 @@
     font-size: 14px;
 }
 
+.section-description.transactions {
+    margin-bottom: 8px;
+}
+
 .charity-balance-container .amount-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.charity-balance-container .amount-container .balance-amount {
+    font-size: 48px;
+    color: #00ADEE;
+    font-weight: 700;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.charity-full-view-container .charity-balance-container .balance-in-eth {
+    font-size: 14px;
+    color: #00ADEE;
+    font-weight: 700;
+    font-family: 'Ubuntu', sans-serif;
 }

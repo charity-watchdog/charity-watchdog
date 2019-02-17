@@ -4,13 +4,26 @@ import './TransactionPreview.css';
 
 class TransactionPreview extends Component {
     render() {
-        const { toAddress, description, timestamp, ethValue, proof } = this.props;
+        const {
+            toAddress,
+            description,
+            timestamp,
+            ethValue,
+            proof
+        } = this.props;
+
+        let dollarValue = ethValue * 1260000;
+        dollarValue = dollarValue.toLocaleString(
+            undefined,
+            { minimumFractionDigits: 2 }
+        );
 
         return (
-            <div>
-                <span>{ethValue}</span>
-                <span>{timestamp}</span>
-                <span>Eye Icon</span>
+            <div className="transaction-preview">
+                {description && <div className="warning-icon" />}
+                <div className="dollar-value">${dollarValue}</div>
+                <div className="eth-value">~{ethValue * 10000} ETH</div>
+                <div className="view-icon material-icons">visibility</div>
             </div>
         );
     }

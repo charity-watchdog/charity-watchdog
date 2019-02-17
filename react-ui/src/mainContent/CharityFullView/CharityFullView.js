@@ -77,9 +77,12 @@ class CharityFullView extends Component {
                     </div>
                     <div className="balance-in-eth">~ 0.344 ETH</div>
                 </div>
-                <Fragment>
-                    {content}
-                </Fragment>
+                <div className="transactions-container">
+                    <div className="section-description transactions">transactions</div>
+                    <div className="transactions-list">
+                        {content}
+                    </div>
+                </div>
             </div>
         );
     }
