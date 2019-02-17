@@ -111,17 +111,29 @@ class App extends Component {
                 break;
             case 'DONE':
                 if (charityInView) {
+                    const charity = charities.find((charity) => {
+                        return charity.id === charityInView;
+                    });
+
                     content = (
                         <CharityFullView
                             transactions={transactions}
                             transactionsRequestState={transactionsRequestState}
                             setCharityInView={this.setCharityInView}
+                            error={error}
+                            logoUrl={charity.logo_url}
+                            charityID={charity.id}
+                            name={charity.name}
+                            description={charity.description}
+                            walletAddress={charity.wallet_address}
+                            missingProof={charity.missing_proof}
                         />
                     );
                 } else {
                     content = charities.map((charity) => {
                         return (
                             <CharityPreview
+                                logoUrl={charity.logo_url}
                                 charityID={charity.id}
                                 name={charity.name}
                                 description={charity.description}
@@ -135,9 +147,6 @@ class App extends Component {
                 break;
             case 'ERROR':
                 content = (<p>{error}</p>);
-                break;
-            default:
-                content = (<p>Default? Should never happen</p>);
                 break;
         }
 

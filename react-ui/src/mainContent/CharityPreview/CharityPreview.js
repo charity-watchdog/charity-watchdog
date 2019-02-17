@@ -37,6 +37,7 @@ class CharityPreview extends Component {
 }
 
 CharityPreview.propTypes = {
+    logoUrl: PropTypes.string,
     charityID: PropTypes.number,
     name: PropTypes.string,
     description: PropTypes.string,

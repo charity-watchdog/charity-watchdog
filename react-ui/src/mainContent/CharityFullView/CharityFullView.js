@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-// import TransactionPreview from "../TransactionPreview/TransactionPreview";
+import TransactionPreview from "../TransactionPreview/TransactionPreview";
 import './CharityFullView.css';
 
 class CharityFullView extends Component {
@@ -9,7 +9,14 @@ class CharityFullView extends Component {
     render() {
         const {
             transactionsRequestState,
-            transactions
+            transactions,
+            error,
+            logoUrl,
+            charityID,
+            name,
+            description,
+            walletAddress,
+            missingProof,
         } = this.props;
         let content;
 
@@ -20,24 +27,20 @@ class CharityFullView extends Component {
                 break;
             case 'DONE':
                 content = transactions.map((transaction) => {
-                    // return (
-                    //     <TransactionPreview
-                    //         charityID={transaction.charity_id}
-                    //         toAddress={transaction.to_address}
-                    //         description={transaction.description}
-                    //         timestamp={transaction.timestamp}
-                    //         ethValue={transaction.eth_value}
-                    //         proof={transaction.proof}
-                    //     />
-                    // );
+                    return (
+                        <TransactionPreview
+                            transactionID={transaction.id}
+                            toAddress={transaction.to_address}
+                            description={transaction.description}
+                            timestamp={transaction.timestamp}
+                            ethValue={transaction.eth_value}
+                            proof={transaction.proof}
+                        />
+                    );
                 });
                 break;
             case 'ERROR':
-                content = (<p>lol</p>);
-                // content = (<p>{error}</p>);
-                break;
-            default:
-                content = (<p>Default? Should never happen</p>);
+                content = (<p>{error}</p>);
                 break;
         }
 
@@ -51,23 +54,40 @@ class CharityFullView extends Component {
                 >
                     back-button
                 </button>
-                {content}
+                <h1>
+                    {name}
+                </h1>
+                <p>
+                    {description}
+                </p>
+                <Fragment>
+                    {content}
+                </Fragment>
             </div>
         );
     }
 }
 
 CharityFullView.propTypes = {
-    transactions: PropTypes.arrayOf(PropTypes.shape({
-            charity_id: PropTypes.number,
-            to_address: PropTypes.string,
-            description: PropTypes.string,
-            timestamp: PropTypes.string,
-            eth_value: PropTypes.number,
-            proof: PropTypes.string
-        })),
+    transactions:
+        PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.number,
+                to_address: PropTypes.string,
+                description: PropTypes.string,
+                timestamp: PropTypes.string,
+                eth_value: PropTypes.string,
+                proof: PropTypes.string,
+            })
+        ),
     setCharityInView: PropTypes.func,
-    transactionsRequestState: PropTypes.string
+    transactionsRequestState: PropTypes.string,
+    logoUrl: PropTypes.string,
+    charityID: PropTypes.number,
+    name: PropTypes.string,
+    description: PropTypes.string,
+    walletAddress: PropTypes.string,
+    missingProof: PropTypes.string,
 };
 
 export default CharityFullView;
