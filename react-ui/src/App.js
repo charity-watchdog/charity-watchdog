@@ -115,7 +115,6 @@ class App extends Component {
                         web3.eth.getBalance(charity.wallet_address, (error, result) => {
                             if (error) throw error;
                             const updateBalance = web3.fromWei(result.toString(), 'ether');
-                            console.log(updateBalance)
                             this.setState({
                                 error: '',
                                 transactions: json.data,
