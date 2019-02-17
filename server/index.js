@@ -48,14 +48,17 @@ if (!isDev && cluster.isMaster) {
   app.get('/api/v1/charity', (req, res) => {
     res.set('Content-Type', 'application/json');
 
-    pool.query('SELECT id, name, description, wallet_address FROM charities', (err, queryRes) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send({ error: err });
-      } else {
-        res.send({ data: queryRes.rows });
+    pool.query(
+      'SELECT id, name, description, wallet_address, missing_proof FROM charities',
+      (err, queryRes) => {
+        if (err) {
+          console.error(err);
+          res.status(500).send({ error: err });
+        } else {
+          res.send({ data: queryRes.rows });
+        }
       }
-    });
+    );
   });
 
   app.get('/api/v1/charity/:charityID', (req, res) => {
@@ -98,14 +101,47 @@ if (!isDev && cluster.isMaster) {
             } else {
               res.send({ data: queryRes.rows[0].charityID });
             }
-        });
+          }
+        );
       })
     ;
   });
 
   app.get('/webhook/v1/address', (req, res) => {
-    console.log(`Received a webhook: ${req.body}`);
+
+    console.log(req.body);
     res.status(200).end();
+
+    if (req.body.event !== 'mined' || req.body.type !== 'sent') {
+      return
+    }
+
+    pool.query(
+      'UPDATE charities SET missing_proof = true WHERE wallet_address = $1 RETURNING id',
+      [ req.body.address ],
+      (err, queryRes) => {
+        if (err) {
+          console.error(err);
+          return
+        }
+
+        const charityID = queryRes.rows[0];
+
+        pool.query(
+          `INSERT INTO transactions
+            (charity_id, to_address, timestamp, eth_value)
+            VALUES
+            ($1, $2, $3, $4)`,
+          [ charityID, req.body.outputs[0], req.body.timestamp, req.body.amount ],
+          (err, queryRes) => {
+            if (err) {
+              console.error(err);
+            }
+          }
+        );
+      }
+    );
+
   });
 
   // All remaining requests return the React app, so it can handle routing.
