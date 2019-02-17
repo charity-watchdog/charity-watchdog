@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
 
 import TopNav from "./navigation/TopNav/TopNav";
-// import MainContent from "./mainContent/MainContent/MainContent";
+import MainContent from "./mainContent/MainContent/MainContent";
+// import CharityPreview from "./mainContent/CharityPreview/CharityPreview";
 import BottomNav from "./navigation/BottomNav/BottomNav";
 
 class App extends Component {
@@ -75,13 +75,21 @@ class App extends Component {
                 content = (<p>Loading...</p>);
                 break;
             case 'DONE':
-                content = charities.map(charity => <p>{charity.name} <strong>{charity.wallet_address}</strong></p>);
+                content = charities.map((charity) => {
+                    // name
+                    // description
+                    // wallet_address
+                    // missing_proof
+                    // return <p>{charity.name} <strong>{charity.}</strong></p>;
+                    return <p>{charity.name} <strong>{charity.wallet_address}</strong></p>;
+                });
                 break;
             case 'ERROR':
                 content = (<p>{error}</p>);
                 break;
             default:
                 content = (<p>Default? Should never happen</p>);
+                break;
         }
 
         return (
@@ -93,7 +101,11 @@ class App extends Component {
                     setSearchBarOpen={this.setSearchBarOpen}
                     updateSearchTerms={this.updateSearchTerms}
                 />
-                {content}
+                <MainContent
+                    view={view}
+                    changeView={this.changeView}
+                    content={content}
+                />
                 <BottomNav
                     view={view}
                     changeView={this.changeView}
