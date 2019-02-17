@@ -132,6 +132,7 @@ input:focus {
 }
 
 .main-content {
+    -webkit-overflow-scrolling: touch;
     width: 100%;
     height: calc(100% - 120px);
     box-sizing: border-box;
@@ -140,7 +141,7 @@ input:focus {
     top: 48px;
     left: 0px;
     background-color: #FDFDFD;
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
     box-sizing: border-box;
 }
