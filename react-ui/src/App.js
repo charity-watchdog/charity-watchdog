@@ -50,15 +50,15 @@ class App extends Component {
                         view,
                         searchTerms: '',
                         searchBarOpen: false,
+                    }, () => {
+                        this.setCharityInView(myCharity.id);
                     });
-                    this.setCharityInView(myCharity.id);
                 } else {
                     this.setState({
                         view,
                         searchTerms: '',
                         searchBarOpen: false,
-                        setCharityInView: '',
-                        myCharityID: -1,
+                        charityInView: '',
                     });
                 }
             });
@@ -67,37 +67,54 @@ class App extends Component {
                 view,
                 searchTerms: '',
                 searchBarOpen: false,
-                setCharityInView: '',
-                myCharityID: -1,
+                charityInView: '',
             });
         }
     }
 
     setCharityInView = (charityID) => {
-        this.setState({ charityInView: charityID, transactionsRequestState: 'FETCHING' }, () => {
-            fetch(`/api/v1/charity/${charityID}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(response.json().error);
-                    }
+        if (charityID === '') {
+            this.setState({
+                charityInView: charityID,
+                searchTerms: '',
+                searchBarOpen: false,
+                view: 'BROWSE',
+            });
+        } else {
+            if (charityID === this.state.myCharityID) {
+                this.setState({ view: 'YOUR_CHARITY' });
+            }
+            this.setState({
+                    charityInView: charityID,
+                    transactionsRequestState: 'FETCHING',
+                    searchTerms: '',
+                    searchBarOpen: false,
+                }, () => {
+                fetch(`/api/v1/charity/${charityID}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(response.json().error);
+                        }
 
-                    return response.json();
-                })
-                .then(json => {
-                    this.setState({
-                        error: '',
-                        transactions: json.data,
-                        transactionsRequestState: 'DONE',
-                    });
-                }).catch(e => {
-                    console.error(e);
-                    this.setState({
-                        error: `Failed to fetch transactions: ${e}`,
-                        transactionsRequestState: 'ERROR',
-                    });
-                })
-            ;
-        });
+                        return response.json();
+                    })
+                    .then(json => {
+                        this.setState({
+                            error: '',
+                            transactions: json.data,
+                            transactionsRequestState: 'DONE',
+                        });
+                    }).catch(e => {
+                        console.error(e);
+                        this.setState({
+                            error: `Failed to fetch transactions: ${e}`,
+                            transactionsRequestState: 'ERROR',
+                        });
+                    })
+                ;
+            });
+        }
+
     }
 
     updateSearchTerms = (searchTerms) => { this.setState({ searchTerms }); }
