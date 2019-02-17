@@ -81,10 +81,10 @@ class TransactionFullView extends Component {
                     </button>
 
                     <div className="transaction-dollar-value">
-                        {(transaction.eth_value * 126000).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                        {(transaction.eth_value * 1260000).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
                     </div>
                     <div className="transaction-eth-value">
-                        ~ {transaction.eth_value * 1000}
+                        ~ {transaction.eth_value * 10000}
                     </div>
                     <div className="transaction-to-address">
                         <div className="send-icon material-icons">send</div>
@@ -134,10 +134,10 @@ class TransactionFullView extends Component {
                     </button>
 
                     <div className="transaction-dollar-value">
-                        {(transaction.eth_value * 126000).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                        {(transaction.eth_value * 1260000).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
                     </div>
                     <div className="transaction-eth-value">
-                        ~ {transaction.eth_value * 1000}
+                        ~ {transaction.eth_value * 10000}
                     </div>
                     <div className="transaction-to-address">
                         <div className="send-icon material-icons">send</div>
