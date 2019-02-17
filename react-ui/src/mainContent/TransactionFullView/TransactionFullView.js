@@ -25,15 +25,25 @@ class TransactionFullView extends Component {
                         X
                     </button>
 
-                    <span className="transaction-eth-value">{transaction.eth_value}</span>
-                    <span className="transaction-to-address">{transaction.to_address}</span>
-                    <span className="transaction-timestamp">{transaction.timestamp}</span>
-                    <label className="description-label">
-                        <textarea name="description" />
-                    </label>
-                    <label className="proof-image">
-                        <input type="file" title="proof-image" name="proof-image" />
-                    </label>
+                    <div>
+                        <span className="transaction-eth-value">{transaction.eth_value}</span>
+                    </div>
+                    <div>
+                        <span className="transaction-to-address">{transaction.to_address}</span>
+                    </div>
+                    <div>
+                        <span className="transaction-timestamp">{transaction.timestamp}</span>
+                    </div>
+                    <div>
+                        <label className="description-label">
+                            <textarea name="description" />
+                        </label>
+                    </div>
+                    <div>
+                        <label className="proof-image">
+                            <input type="file" title="proof-image" name="proof-image" />
+                        </label>
+                    </div>
                 </div>
             );
         } else {
@@ -46,11 +56,19 @@ class TransactionFullView extends Component {
                         X
                     </button>
 
-                    <span className="transaction-eth-value">{transaction.eth_value}</span>
-                    <span className="transaction-to-address">{transaction.to_address}</span>
-                    <span className="transaction-timestamp">{transaction.timestamp}</span>
-                    <span>{transaction.description}</span>
-                    <img src={transaction.proof} alt="Image proof of spend" />
+                    <div>
+                        <span className="transaction-eth-value">{transaction.eth_value}</span>
+                    </div>
+                    <div>
+                        <span className="transaction-to-address">{transaction.to_address}</span>
+                    </div>
+                    <div>
+                        <span className="transaction-timestamp">{transaction.timestamp}</span>
+                    </div>
+                    <div>
+                        <span>{transaction.description}</span>
+                    </div>
+                        <img src={transaction.proof} alt="Image proof of spend" />
                 </div>
             );
         }

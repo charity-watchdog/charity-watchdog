@@ -166,3 +166,7 @@ input:focus {
     background-color: rgba(255, 255, 255, 0.9);
     z-index: 100;
 }
+
+.transaction-modal {
+    display: block;
+}
