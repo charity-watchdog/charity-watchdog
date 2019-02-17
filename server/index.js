@@ -49,7 +49,7 @@ if (!isDev && cluster.isMaster) {
         res.set('Content-Type', 'application/json');
 
         pool.query(
-            'SELECT id, name, description, wallet_address, missing_proof, logo_url FROM charities',
+            'SELECT id, name, description, wallet_address, missing_proof, logo_url FROM charities ORDER BY id',
             (err, queryRes) => {
                 if (err) {
                     console.error(err);

@@ -78,7 +78,7 @@ class CharityFullView extends Component {
                 <div
                     className="charity-banner"
                     style={{
-                        backgroundImage: `url(https://images.unsplash.com/photo-1547014751-009831e5bc73?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)`
+                        backgroundImage: `url(${logoUrl})`
                     }}
                 >
                     <button
