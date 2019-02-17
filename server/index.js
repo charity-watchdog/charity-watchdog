@@ -99,7 +99,7 @@ if (!isDev && cluster.isMaster) {
             if (err) {
               res.status(500).send({ error: err });
             } else {
-              res.send({ data: queryRes.rows[0].charityID });
+              res.send({ data: queryRes.rows[0].id });
             }
           }
         );
@@ -125,7 +125,7 @@ if (!isDev && cluster.isMaster) {
           return
         }
 
-        const charityID = queryRes.rows[0];
+        const charityID = queryRes.rows[0].id;
 
         pool.query(
           `INSERT INTO transactions
