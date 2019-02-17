@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import TopNav from "./navigation/TopNav/TopNav";
 import MainContent from "./mainContent/MainContent/MainContent";
-// import CharityPreview from "./mainContent/CharityPreview/CharityPreview";
+import CharityPreview from "./mainContent/CharityPreview/CharityPreview";
 import BottomNav from "./navigation/BottomNav/BottomNav";
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
             charities: [],
             charityRequestState: 'INIT',
             view: 'INTRO', // 'BROWSE', 'YOUR_CHARITY'
-            charityInBrowse: '', //  by ETH Address. If own charity -> switch to 'YOUR_CHARITY' view
+            charityInView: '', //  by ETH Address. If own charity -> switch to 'YOUR_CHARITY' view
             searchTerms: '',
             searchBarOpen: false,
             modalOpen: false
@@ -26,6 +26,10 @@ class App extends Component {
             searchTerms: '',
             searchBarOpen: false
         });
+    }
+
+    setCharityInView = (charity) => {
+        this.setState({ charityInView: charity });
     }
 
     updateSearchTerms = (searchTerms) => { this.setState({ searchTerms }); }
@@ -81,7 +85,15 @@ class App extends Component {
                     // wallet_address
                     // missing_proof
                     // return <p>{charity.name} <strong>{charity.}</strong></p>;
-                    return <p>{charity.name} <strong>{charity.wallet_address}</strong></p>;
+                    return (
+                        <CharityPreview
+                            name={charity.name}
+                            description={charity.description}
+                            walletAddress={charity.wallet_address}
+                            missingProof={charity.missing_proof}
+                            setCharityInView={this.setCharityInView}
+                        />
+                    );
                 });
                 break;
             case 'ERROR':
