@@ -34,6 +34,7 @@ class App extends Component {
             web3.currentProvider.enable();
             web3.eth.getAccounts((error, accounts) => {
                 if (error) throw error;
+                alert(accounts[0]);
                 console.log(accounts); // ['0x...']
             });
         }
