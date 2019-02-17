@@ -26,6 +26,24 @@ class TransactionFullView extends Component {
                     "description": this._textarea.value,
                     "proofImage": reader.result,
                 }),
+            }).then((response) => {
+                if (!response.ok) {
+                    throw new Error(response.json().error);
+                }
+
+                return response.json();
+            }).then(json => {
+                const charityID = json.data;
+
+                this.handleTransactionModalOpen();
+                this.props.setCharityInView(charityID);
+                this.props.setProof(charityID);
+            }).catch(e => {
+                console.error(e);
+                this.setState({
+                    error: `Failed to upload proof: ${e}`,
+                    transactionsRequestState: 'ERROR',
+                });
             });
         }, false);
 

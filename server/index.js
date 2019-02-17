@@ -119,13 +119,26 @@ if (!isDev && cluster.isMaster) {
             (description, proof)
             =
             ($1, $2)
-            WHERE id = $3`,
+            WHERE id = $3
+            RETURNING charity_id`,
             [description, proofImage, req.params.transactionID],
             (err, queryRes) => {
                 if (err) {
                     res.status(500).send({ error: err });
                 } else {
-                    res.status(200).end();
+                    const charityID = queryRes.rows[0].charity_id;
+
+                    pool.query(
+                        'UPDATE charities SET missing_proof = false WHERE id = $1 RETURNING id',
+                        [ charityID ],
+                        (err, queryRes) => {
+                            if (err) {
+                                res.status(500).send({ error: err });
+                            } else {
+                                res.send({ data: queryRes.rows[0].id });
+                            }
+                        }
+                    );
                 }
             }
         );

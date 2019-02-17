@@ -87,11 +87,16 @@ class CharityFullView extends Component {
                     >
                         back
                     </button>
-                    <div className="warning-container">
-                        <div className="white-underlayer" />
-                        <div className="warning-icon view-icon material-icons">error</div>
-                        <div className="warning-description">no proof</div>
-                    </div>
+
+                    {missingProof ?
+                        <div className="warning-container">
+                            <div className="white-underlayer" />
+                            <div className="warning-icon view-icon material-icons">error</div>
+                            <div className="warning-description">no proof</div>
+                        </div>
+                    :
+                        null
+                    }
                 </div>
                 <h1 className="charity-name">
                     {name}

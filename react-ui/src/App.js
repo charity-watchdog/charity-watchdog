@@ -33,6 +33,18 @@ class App extends Component {
         };
     }
 
+    setProof = (charityID) => {
+        const { charities } = this.state;
+
+        const charityIndex = charities.findIndex((charity) => {
+            return charity.id === charityID;
+        });
+
+        charities[charityIndex].missing_proof = false;
+
+        this.setState({ charities });
+    }
+
     changeView = (view) => {
         if (view === 'YOUR_CHARITY') {
             web3.currentProvider.enable();
@@ -259,6 +271,8 @@ class App extends Component {
                                 })}
                                 ownTransaction={ myCharityID !== -1 && charityInView && myCharityID === charityInView }
                                 setTransactionInModal={this.setTransactionInModal}
+                                setCharityInView={this.setCharityInView}
+                                setProof={this.setProof}
                             />
                         }
                         {transactionInView && modalOpen && <div className="white-overlay" />}
