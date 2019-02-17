@@ -12,7 +12,7 @@ const isDev = process.env.NODE_ENV !== 'production';
 const PORT = process.env.PORT || 5000;
 const databaseUrl = process.env.DATABASE_URL || new String(execSync('heroku config:get DATABASE_URL -a charity-watchdog')).trim();
 
-const pool = new Pool({ connectionString: databaseUrl, ssl: true, statement_timeout: 25 });
+const pool = new Pool({ connectionString: databaseUrl, ssl: true, statement_timeout: 25000 });
 
 // Multi-process to utilize all CPU cores.
 if (!isDev && cluster.isMaster) {
@@ -64,7 +64,7 @@ if (!isDev && cluster.isMaster) {
   app.get('/api/v1/charity/:charityID', (req, res) => {
     res.set('Content-Type', 'application/json');
 
-    pool.query('SELECT * FROM transactions WHERE charity_id = $1', (err, queryRes) => {
+    pool.query('SELECT * FROM transactions WHERE charity_id = $1', [ req.params.charityID ], (err, queryRes) => {
       if (err) {
         console.error(err);
         res.status(500).send({ error: err });

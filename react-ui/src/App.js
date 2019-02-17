@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import TopNav from "./navigation/TopNav/TopNav";
 import CharityPreview from "./mainContent/CharityPreview/CharityPreview";
+import CharityFullView from "./mainContent/CharityFullView/CharityFullView";
 import BottomNav from "./navigation/BottomNav/BottomNav";
 
 import './App.css';
@@ -32,8 +33,31 @@ class App extends Component {
         });
     }
 
-    setCharityInView = (charity) => {
-        this.setState({ charityInView: charity });
+    setCharityInView = (charityID) => {
+        this.setState({ charityInView: charityID, transactionsRequestState: 'FETCHING' }, () => {
+            fetch(`/api/v1/charity/${charityID}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(response.json().error);
+                    }
+
+                    return response.json();
+                })
+                .then(json => {
+                    this.setState({
+                        error: '',
+                        transactions: json.data,
+                        transactionsRequestState: 'DONE',
+                    });
+                }).catch(e => {
+                    console.error(e);
+                    this.setState({
+                        error: `Failed to fetch transactions: ${e}`,
+                        transactionsRequestState: 'ERROR',
+                    });
+                })
+            ;
+        });
     }
 
     updateSearchTerms = (searchTerms) => { this.setState({ searchTerms }); }
@@ -74,7 +98,9 @@ class App extends Component {
             view,
             searchTerms,
             searchBarOpen,
-            charityInView
+            charityInView,
+            transactions,
+            transactionsRequestState,
         } = this.state;
         let content;
 
@@ -87,7 +113,7 @@ class App extends Component {
                 if (charityInView) {
                     content = (
                         <CharityFullView
-                            transactions={tansactions}
+                            transactions={transactions}
                             transactionsRequestState={transactionsRequestState}
                             setCharityInView={this.setCharityInView}
                         />
@@ -96,6 +122,7 @@ class App extends Component {
                     content = charities.map((charity) => {
                         return (
                             <CharityPreview
+                                charityID={charity.id}
                                 name={charity.name}
                                 description={charity.description}
                                 walletAddress={charity.wallet_address}

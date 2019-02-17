@@ -11,6 +11,7 @@ class CharityFullView extends Component {
             transactionsRequestState,
             transactions
         } = this.props;
+        let content;
 
         switch(transactionsRequestState) {
             case 'INIT':
@@ -29,10 +30,11 @@ class CharityFullView extends Component {
                     //         proof={transaction.proof}
                     //     />
                     // );
-                }
+                });
                 break;
             case 'ERROR':
-                content = (<p>{error}</p>);
+                content = (<p>lol</p>);
+                // content = (<p>{error}</p>);
                 break;
             default:
                 content = (<p>Default? Should never happen</p>);

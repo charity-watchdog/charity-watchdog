@@ -5,11 +5,11 @@ import './CharityPreview.css';
 class CharityPreview extends Component {
     handleSetCharityInView = () => {
         const {
-            walletAddress,
+            charityID,
             setCharityInView
         } = this.props;
 
-        return () => { setCharityInView(walletAddress); }
+        return () => { setCharityInView(charityID); }
     }
 
     render() {
@@ -31,6 +31,7 @@ class CharityPreview extends Component {
 }
 
 CharityPreview.propTypes = {
+    charityID: PropTypes.number,
     name: PropTypes.string,
     description: PropTypes.string,
     walletAddress: PropTypes.string,
