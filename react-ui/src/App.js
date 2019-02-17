@@ -24,6 +24,7 @@ class App extends Component {
             transactionsRequestState: 'INIT',
             view: 'INTRO', // 'BROWSE', 'YOUR_CHARITY'
             charityInView: '', //  by chairtyID. If own charity -> switch to 'YOUR_CHARITY' view
+            balanceInView: '',
             searchTerms: '',
             searchBarOpen: false,
             modalOpen: false,
@@ -73,6 +74,11 @@ class App extends Component {
     }
 
     setCharityInView = (charityID) => {
+        const {
+            charities,
+            charityInView
+        } = this.state;
+
         if (charityID === '') {
             this.setState({
                 charityInView: charityID,
@@ -84,12 +90,14 @@ class App extends Component {
             if (charityID === this.state.myCharityID) {
                 this.setState({ view: 'YOUR_CHARITY' });
             }
+
             this.setState({
                     charityInView: charityID,
                     transactionsRequestState: 'FETCHING',
                     searchTerms: '',
                     searchBarOpen: false,
                 }, () => {
+
                 fetch(`/api/v1/charity/${charityID}`)
                     .then(response => {
                         if (!response.ok) {
@@ -99,10 +107,21 @@ class App extends Component {
                         return response.json();
                     })
                     .then(json => {
-                        this.setState({
-                            error: '',
-                            transactions: json.data,
-                            transactionsRequestState: 'DONE',
+                        const charity = charities.find((charity) => {
+                            return charity.id === charityID;
+                        });
+
+                        web3.currentProvider.enable();
+                        web3.eth.getBalance(charity.wallet_address, (error, result) => {
+                            if (error) throw error;
+                            const updateBalance = web3.fromWei(result.toString(), 'ether');
+                            console.log(updateBalance)
+                            this.setState({
+                                error: '',
+                                transactions: json.data,
+                                transactionsRequestState: 'DONE',
+                                balanceInView: updateBalance,
+                            });
                         });
                     }).catch(e => {
                         console.error(e);
@@ -163,6 +182,7 @@ class App extends Component {
             searchTerms,
             searchBarOpen,
             charityInView,
+            balanceInView,
             transactions,
             transactionsRequestState,
             transactionInView,
@@ -183,6 +203,7 @@ class App extends Component {
 
                     content = (
                         <CharityFullView
+                            balanceInView={balanceInView}
                             transactions={transactions}
                             transactionsRequestState={transactionsRequestState}
                             setCharityInView={this.setCharityInView}
