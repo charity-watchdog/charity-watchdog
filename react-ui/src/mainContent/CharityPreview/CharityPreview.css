@@ -6,14 +6,35 @@
     box-sizing: border-box;
 }
 
-.charity-preview-container .charity-preview-image {
+.charity-preview-container .charity-preview-banner {
     width: 100%;
     height: 160px;
     margin-bottom: 12px;
+    position: relative;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     background: no-repeat center center;
     background-size: cover;
+}
+
+.charity-preview-banner .warning-icon {
+    font-size: 30px;
+    color: #F8009C;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 10;
+}
+
+.charity-preview-banner .white-underlay {
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 12px;
+    position: absolute;
+    top: 11px;
+    right: 11px;
+    z-index: 9;
 }
 
 .charity-preview-container .charity-name {
