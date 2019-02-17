@@ -157,8 +157,10 @@ class App extends Component {
         });
     }
 
-    componentDidMount() {
-        this.setState({ charityRequestState: 'FETCHING' }, () => {
+    fetchAllCharities = () => {
+        const requestState = this.state.charityRequestState === 'DONE' ? 'DONE' : 'FETCHING';
+
+        this.setState({ charityRequestState: requestState }, () => {
             fetch('/api/v1/charity')
             .then(response => {
                 if (!response.ok) {
@@ -181,6 +183,16 @@ class App extends Component {
                 });
             });
         });
+    }
+
+    componentDidMount() {
+        const intervalId = setInterval(this.fetchAllCharities, 2500);
+        this.setState({intervalId: intervalId});
+        this.fetchAllCharities();
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.state.intervalId);
     }
 
     render() {
