@@ -36,17 +36,32 @@ class App extends Component {
             web3.currentProvider.enable();
             web3.eth.getAccounts((error, accounts) => {
                 if (error) throw error;
-                alert(accounts[0]);
-                console.log(accounts); // ['0x...']
+                const accountAddress = accounts[0]
+                console.log(accountAddress); // ['0x...']
+
+                if (0 < this.state.charities.length) {
+                    const myCharity = this.state.charities.find((charity) => {
+                        return charity.wallet_address === accountAddress
+                    });
+
+                    this.setCharityInView(myCharity.id);
+                } else {
+                    this.setState({
+                        view,
+                        searchTerms: '',
+                        searchBarOpen: false,
+                        setCharityInView: ''
+                    });
+                }
+            });
+        } else {
+            this.setState({
+                view,
+                searchTerms: '',
+                searchBarOpen: false,
+                setCharityInView: ''
             });
         }
-
-        this.setState({
-            view,
-            searchTerms: '',
-            searchBarOpen: false,
-            setCharityInView: ''
-        });
     }
 
     setCharityInView = (charityID) => {
