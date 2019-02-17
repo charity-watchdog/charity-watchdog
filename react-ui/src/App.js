@@ -4,10 +4,13 @@ import TopNav from "./navigation/TopNav/TopNav";
 import CharityPreview from "./mainContent/CharityPreview/CharityPreview";
 import CharityFullView from "./mainContent/CharityFullView/CharityFullView";
 import BottomNav from "./navigation/BottomNav/BottomNav";
-import Fortmatic from 'fortmatic';
+import Portis from '@portis/web3';
 import Web3 from 'web3';
 
 import './App.css';
+
+const portis = new Portis('b7d76de2-a38e-4065-b1a2-4533ab7faada', 'mainnet');
+const web3 = new Web3(portis.provider);
 
 class App extends Component {
     constructor(props) {
@@ -28,10 +31,8 @@ class App extends Component {
 
     changeView = (view) => {
         if (view === 'YOUR_CHARITY') {
-            const fm = new Fortmatic('pk_live_C4B09BA5D33FB539');
-            const web3 = new Web3(fm.getProvider());
-            fm.user.login().then(() => {
-                web3.eth.getAccounts().then(console.log); // ['0x...']
+            web3.eth.getAccounts((error, accounts) => {
+                console.log(accounts);
             });
         }
 

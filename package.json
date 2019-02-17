@@ -11,10 +11,12 @@
     "heroku-postbuild": "cd react-ui/ && npm ci && npm run build"
   },
   "dependencies": {
+    "@portis/web3": "^2.0.0-beta.11",
     "express": "^4.16.4",
     "morgan": "^1.9.1",
     "node-fetch": "^2.3.0",
-    "pg": "^7.8.0"
+    "pg": "^7.8.0",
+    "web3": "^1.0.0-beta.46"
   },
   "repository": {
     "type": "git",
