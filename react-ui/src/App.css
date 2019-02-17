@@ -9,6 +9,7 @@ html {
 }
 
 body {
+    background-color: #00ADEE;
     -webkit-tap-highlight-color: transparent;
     -webkit-user-select: none;
     -webkit-touch-callout: none;
