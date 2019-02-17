@@ -116,7 +116,7 @@ button.large {
     border-radius: 24px;
 }
 
-input {
+input, textarea {
     width: 100%;
     box-sizing: border-box;
     padding: 4px 8px;

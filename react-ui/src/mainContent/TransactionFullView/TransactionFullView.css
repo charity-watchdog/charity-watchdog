@@ -81,8 +81,18 @@
     margin-right: 10px;
 }
 
+.transaction-modal .transaction-description-input .description-icon {
+    margin-right: 10px;
+}
+
 .transaction-modal .transaction-description .description-info {
     font-size: 10px;
+}
+
+.transaction-modal .transaction-description-input {
+    padding: 0 8px 0 2px;
+    margin-bottom: 8px;
+    display: flex;
 }
 
 .transaction-modal .spend-proof {
@@ -96,4 +106,14 @@
 
 .transaction-modal .spend-proof .image-proof {
     max-width: 70%;
+}
+
+.transaction-modal .spend-proof .proof-image-submit {
+    margin: 0 0 80px 0;
+}
+
+.submit-proof-button {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
 }

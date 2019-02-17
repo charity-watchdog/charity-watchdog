@@ -84,34 +84,43 @@ class TransactionFullView extends Component {
                         {(transaction.eth_value * 126000).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
                     </div>
                     <div className="transaction-eth-value">
-                        ~ {transaction.eth_value}
+                        ~ {transaction.eth_value * 1000}
                     </div>
-                    <div>
-                        <span className="transaction-to-address">{transaction.to_address}</span>
+                    <div className="transaction-to-address">
+                        <div className="send-icon material-icons">send</div>
+                        <div className="address-info">{transaction.to_address}</div>
                     </div>
-                    <div>
-                        <span className="transaction-timestamp">{transaction.timestamp}</span>
+                    <div className="transaction-timestamp">
+                        <div className="date-icon material-icons">date_range</div>
+                        <div className="timestamp-info">{transaction.timestamp}</div>
                     </div>
-                    <div>
-                        <label className="description-label">
-                            <textarea
-                                ref={(element) => this._textarea = element}
-                                name="description"
-                                onChange={this.handleDescriptionChange}
-                            />
-                        </label>
+                    <div className="transaction-description-input">
+                        <div className="description-icon material-icons">chrome_reader_mode</div>
+                        <textarea
+                            ref={(element) => this._textarea = element}
+                            name="description"
+                            className="description-proof"
+                            onChange={this.handleDescriptionChange}
+                        />
                     </div>
-                    <div>
+                    <div className="spend-proof">
+                        <div className="spend-icon material-icons">camera_alt</div>
                         <label className="proof-image">
                             <input
                                 ref={(element) => this._input = element}
                                 type="file"
                                 title="proof-image"
                                 name="proof-image"
+                                className="proof-image-submit"
                             />
                         </label>
                     </div>
-                    <button className="submit-proof" onClick={this.submitProof} />
+                    <button
+                        className="submit-proof-button solid blue"
+                        onClick={this.submitProof}
+                    >
+                        save
+                    </button>
                 </div>
             );
         } else {
