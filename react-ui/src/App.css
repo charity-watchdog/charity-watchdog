@@ -42,7 +42,7 @@ code {
     box-sizing: border-box;
 }
 
-.app {
+.App {
     position: fixed;
     width: 100%;
     height: 100%;
