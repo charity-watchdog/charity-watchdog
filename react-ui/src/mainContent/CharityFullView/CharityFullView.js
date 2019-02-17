@@ -1,37 +1,62 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+// import TransactionPreview from "../TransactionPreview/TransactionPreview";
 import './CharityFullView.css';
 
 class CharityFullView extends Component {
-    handleSetCharityInView = () => {
-        const {
-            walletAddress,
-            setCharityInView
-        } = this.props;
-
-        return () => { setCharityInView(walletAddress); }
-    }
+    handleSetCharityInView = () => { this.props.setCharityInView(''); }
 
     render() {
         const {
-            name,
-            description
+            transactionsRequestState,
+            transactions
         } = this.props;
+
+        switch(transactionsRequestState) {
+            case 'INIT':
+            case 'FETCHING':
+                content = <p>Loading...</p>;
+                break;
+            case 'DONE':
+                content = transactions.map((transaction) => {
+                    // return (
+                    //     <TransactionPreview
+                    //         charityID={transaction.charity_id}
+                    //         toAddress={transaction.to_address}
+                    //         description={transaction.description}
+                    //         timestamp={transaction.timestamp}
+                    //         ethValue={transaction.eth_value}
+                    //         proof={transaction.proof}
+                    //     />
+                    // );
+                }
+                break;
+            case 'ERROR':
+                content = (<p>{error}</p>);
+                break;
+            default:
+                content = (<p>Default? Should never happen</p>);
+                break;
+        }
 
         return (
             <div
                 className="charity-full-view-container"
-                onClick={this.handleSetCharityInView()}
             >
-                <div className="charity-name">{name}</div>
-                <div className="charity-name">{description}</div>
+                <button
+                    className="back-button"
+                    onClick={this.handleSetCharityInView}
+                >
+                    back-button
+                </button>
+                {content}
             </div>
         );
     }
 }
 
 CharityFullView.propTypes = {
-    tansactions: PropTypes.arrayOf(PropTypes.shape({
+    transactions: PropTypes.arrayOf(PropTypes.shape({
             charity_id: PropTypes.number,
             to_address: PropTypes.string,
             description: PropTypes.string,
@@ -39,6 +64,7 @@ CharityFullView.propTypes = {
             eth_value: PropTypes.number,
             proof: PropTypes.string
         })),
+    setCharityInView: PropTypes.func,
     transactionsRequestState: PropTypes.string
 };
 

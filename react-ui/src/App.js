@@ -12,7 +12,7 @@ class App extends Component {
         this.state = {
             error: '',
             charities: [],
-            tansactions: [],
+            transactions: [],
             charityRequestState: 'INIT',
             transactionsRequestState: 'INIT',
             view: 'INTRO', // 'BROWSE', 'YOUR_CHARITY'
@@ -27,7 +27,8 @@ class App extends Component {
         this.setState({
             view,
             searchTerms: '',
-            searchBarOpen: false
+            searchBarOpen: false,
+            setCharityInView: ''
         });
     }
 
@@ -86,8 +87,9 @@ class App extends Component {
                 if (charityInView) {
                     content = (
                         <CharityFullView
-                            tansactions={tansactions}
+                            transactions={tansactions}
                             transactionsRequestState={transactionsRequestState}
+                            setCharityInView={this.setCharityInView}
                         />
                     );
                 } else {
