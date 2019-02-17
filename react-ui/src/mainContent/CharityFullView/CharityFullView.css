@@ -31,9 +31,6 @@
     padding: 0 8px;
     margin-bottom: 24px;
     font-size: 12px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
 }
 
 .charity-full-view-container .charity-balance-container {
