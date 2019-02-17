@@ -12,6 +12,18 @@
     box-sizing: border-box;
 }
 
+.transaction-preview.pink {
+    padding: 0 8px 0 4px;
+    border: 2px solid #F8009C;
+    color: #F8009C;
+    box-shadow: 0 5px 10px rgba(238,0,60,0.1), 0 3px 3px rgba(238,0,60,0.1);
+    box-sizing: border-box;
+}
+
+.transaction-preview.pink .warning-icon {
+    margin-right: 4px;
+}
+
 .transaction-preview .dollar-value {
     margin-right: 4px;
     font-size: 20px;

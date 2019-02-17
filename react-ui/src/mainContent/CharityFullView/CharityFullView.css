@@ -9,6 +9,8 @@
 
 .charity-full-view-container .charity-banner {
     padding: 8px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .charity-full-view-container .charity-name {
@@ -71,4 +73,43 @@
     color: #00ADEE;
     font-weight: 700;
     font-family: 'Ubuntu', sans-serif;
+}
+
+.charity-full-view-container .warning-container {
+    width: 88px;
+    height: 26px;
+    padding: 0 8px 0 0;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: 2px solid #F8009C;
+    color: #F8009C;
+    background-color: rgba(255, 103, 199, 0.3);
+    box-shadow: 0 5px 10px rgba(238, 0, 60, 0.2), 0 3px 3px rgba(238, 0, 60, 0.2);
+    box-sizing: border-box;
+}
+
+.warning-container .white-underlayer {
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    left: -1px;
+    z-index: 1;
+    background-color: white;
+    border-radius: 12px;
+}
+
+.warning-container .warning-icon {
+    font-size: 30px;
+    margin: 0 4px 0 -4px;
+    z-index: 2;
+}
+
+.warning-container .warning-description {
+    padding-bottom: 2px;
+    line-height: 14px;
+    font-size: 10px;
+    font-weight: 700;
+    color: white;
 }

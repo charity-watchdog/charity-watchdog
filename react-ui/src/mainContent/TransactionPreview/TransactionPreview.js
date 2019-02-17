@@ -18,9 +18,14 @@ class TransactionPreview extends Component {
             { minimumFractionDigits: 2 }
         );
 
+        let transactionClass = 'transaction-preview';
+        if (description) {
+            transactionClass = 'transaction-preview pink';
+        }
+
         return (
-            <div className="transaction-preview">
-                {description && <div className="warning-icon" />}
+            <div className={transactionClass}>
+                {description && <div className="warning-icon view-icon material-icons">error</div>}
                 <div className="dollar-value">${dollarValue}</div>
                 <div className="eth-value">~{ethValue * 10000} ETH</div>
                 <div className="view-icon material-icons">visibility</div>
