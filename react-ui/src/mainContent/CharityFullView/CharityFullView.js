@@ -26,18 +26,22 @@ class CharityFullView extends Component {
                 content = <p>Loading...</p>;
                 break;
             case 'DONE':
-                content = transactions.map((transaction) => {
-                    return (
-                        <TransactionPreview
-                            transactionID={transaction.id}
-                            toAddress={transaction.to_address}
-                            description={transaction.description}
-                            timestamp={transaction.timestamp}
-                            ethValue={transaction.eth_value}
-                            proof={transaction.proof}
-                        />
-                    );
-                });
+                if (transactions.length === 0) {
+                    content = <p>This charity does not have any spends yet.</p>
+                } else {
+                    content = transactions.map((transaction) => {
+                        return (
+                            <TransactionPreview
+                                transactionID={transaction.id}
+                                toAddress={transaction.to_address}
+                                description={transaction.description}
+                                timestamp={transaction.timestamp}
+                                ethValue={transaction.eth_value}
+                                proof={transaction.proof}
+                            />
+                        );
+                    });
+                }
                 break;
             case 'ERROR':
                 content = (<p>{error}</p>);
