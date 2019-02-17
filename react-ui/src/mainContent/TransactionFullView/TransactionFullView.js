@@ -116,7 +116,7 @@ class TransactionFullView extends Component {
                         </label>
                     </div>
                     <button
-                        className="submit-proof-button solid blue"
+                        className={this.state.submissionButtonPressed ? "submit-proof-button blue" : "submit-proof-button solid blue"}
                         onClick={this.submitProof}
                     >
                         save
