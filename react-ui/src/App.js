@@ -253,9 +253,23 @@ class App extends Component {
                 return (
                     <div className="App">
                         <div className="Intro" onClick={() => this.setState({ view: 'BROWSE' })}>
-                            <h1>100%</h1>
-                            <h2>transparent</h2>
-                            <h2>charities</h2>
+                            <div className="intro-info">
+                                <h1 className="hundred">100%</h1>
+                                <h2 className="transperent">transparent</h2>
+                                <h2 className="charities">charities</h2>
+                                <button
+                                    className="solid white blue large"
+                                >
+                                    browse charities
+                                </button>
+                            </div>
+                            <div className="bottom-button-container">
+                                <button
+                                    className="solid blue large"
+                                >
+                                    become accountable
+                                </button>
+                            </div>
                         </div>
                     </div>
                 );

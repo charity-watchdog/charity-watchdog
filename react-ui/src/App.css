@@ -25,14 +25,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.Intro {
-    width: 100wh;
-    height: 100vh;
-    background-image: url('https://images.unsplash.com/photo-1550306269-b597bdc4b65c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=752&q=80');
-    background-size: cover;
-    background-position: center;
-}
-
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
@@ -165,4 +157,46 @@ input:focus {
     left: 0;
     background-color: rgba(255, 255, 255, 0.9);
     z-index: 100;
+}
+
+.Intro {
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1550306269-b597bdc4b65c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=752&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.Intro .intro-info {
+    width: 100%;
+    padding-top: 80px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.Intro .intro-info .hundred {
+    font-size: 72px;
+}
+
+.Intro .intro-info .transperent {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.Intro .intro-info .charities {
+    margin-bottom: 40px;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.Intro .bottom-button-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 36px;
 }
