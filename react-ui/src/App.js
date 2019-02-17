@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-// import TopNav from "./navigation/TopNav/TopNav";
+import TopNav from "./navigation/TopNav/TopNav";
 // import MainContent from "./mainContent/MainContent/MainContent";
 import BottomNav from "./navigation/BottomNav/BottomNav";
 
@@ -21,7 +20,17 @@ class App extends Component {
         };
     }
 
-    changeView = (view) => { this.setState({ view }); }
+    changeView = (view) => {
+        this.setState({
+            view,
+            searchTerms: '',
+            searchBarOpen: false
+        });
+    }
+
+    updateSearchTerms = (searchTerms) => { this.setState({ searchTerms }); }
+
+    setSearchBarOpen = (searchBarOpen) => { this.setState({ searchBarOpen }); }
 
     componentDidMount() {
         this.setState({charityRequestState: 'FETCHING' }, () => {
@@ -54,7 +63,9 @@ class App extends Component {
             charityRequestState,
             charities,
             error,
-            view
+            view,
+            searchTerms,
+            searchBarOpen
         } = this.state;
         let content;
 
@@ -75,10 +86,14 @@ class App extends Component {
 
         return (
             <div className="App">
-                <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
+                <TopNav
+                    view={view}
+                    searchTerms={searchTerms}
+                    searchBarOpen={searchBarOpen}
+                    setSearchBarOpen={this.setSearchBarOpen}
+                    updateSearchTerms={this.updateSearchTerms}
+                />
                 {content}
-                </header>
                 <BottomNav
                     view={view}
                     changeView={this.changeView}

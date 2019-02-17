@@ -1,39 +1,35 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as navigationActions from '../../../actions/navigationActions';
 import PropTypes from 'prop-types';
 import './TopNav.css';
 
 class TopNav extends Component {
-    handleAccountClick = () => {
-        this.props.navigationActions.changeView('Account Details');
-    }
-
-    getColourClass = () => {
-        switch (this.props.view) {
-            case 'Balance':
-                return ' blue';
-            case 'Search':
-                return ' purple';
-            case 'Activation Requests':
-                return ' orange';
-            default:
-                return ' grey';
+    handleSearchBarOpen = (barState) => {
+        return () => {
+            this.props.setSearchBarOpen(barState);
         }
     }
 
-    renderRefreshIcon = () => {
-        let toRender;
-        if (this.props.view === 'Balance') {
-            toRender = (
-                <div className="refresh-icon material-icons">
-                    cached
-                </div>
-            );
+    renderSearchIcon = () => {
+        const {
+            searchBarOpen,
+            setSearchBarOpen
+        } = this.props;
+        let handleSearhBarOpen;
+
+        if (searchBarOpen) {
+            handleSearhBarOpen = () => { setSearchBarOpen(false); }
+        } else {
+            handleSearhBarOpen = () => { setSearchBarOpen(true); }
         }
 
-        return toRender;
+        return (
+            <i
+                className="profile-access material-icons"
+                onClick={handleSearhBarOpen}
+            >
+                search
+            </i>
+        );
     }
 
     render() {
@@ -42,22 +38,12 @@ class TopNav extends Component {
         } = this.props;
 
         return (
-            <div className={'top-nav' + this.getColourClass()}>
+            <div className="top-nav blue">
                 <div className="profile-info-container">
-                    <div className="current-community">Lighthouse Labs</div>
+                    <div className="current-community">Charity Watchdog</div>
                     <div className="account-navigation-container">
-                        {view === 'Account Details' && <div className="highlight" />}
-                        <i
-                            className="profile-access material-icons"
-                            onClick={this.handleAccountClick}
-                        >
-                            account_circle
-                        </i>
+                        {view === 'BROWSE' && this.renderSearchIcon()}
                     </div>
-                </div>
-                <div className="header-container">
-                    <div className="header">{view}</div>
-                    {this.renderRefreshIcon()}
                 </div>
             </div>
         );
@@ -65,23 +51,11 @@ class TopNav extends Component {
 }
 
 TopNav.propTypes = {
-    navigationActions: PropTypes.object,
-    view: PropTypes.string
+    view: PropTypes.string,
+    searchTerms: PropTypes.string,
+    searchBarOpen: PropTypes.bool,
+    setSearchBarOpen: PropTypes.func,
+    updateSearchTerms: PropTypes.func,
 };
 
-function mapStateToProps(state) {
-    return {
-        view: state.navigation.view
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        navigationActions: bindActionCreators(navigationActions, dispatch)
-    };
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(TopNav);
+export default TopNav;

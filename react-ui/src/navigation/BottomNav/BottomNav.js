@@ -8,9 +8,7 @@ class BottomNav extends Component {
     }
 
     render() {
-        const {
-            view
-        } = this.props;
+        const { view } = this.props;
 
         return (
             <div className="bottom-nav">
@@ -24,7 +22,7 @@ class BottomNav extends Component {
                     onClick={this.handleNavClick('BROWSE')}
                 >
                     <div className="menu-item-container">
-                        <div className="menu-icon material-icons">account_balance_wallet</div>
+                        <div className="menu-icon material-icons">loyalty</div>
                         <div className="menu-title">
                             {view === "BROWSE" && <div className="highlight" />}
                             <div className="title">browse</div>
