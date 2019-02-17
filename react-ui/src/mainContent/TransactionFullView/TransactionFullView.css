@@ -17,4 +17,83 @@
     overflow-x: hidden;
     z-index: 110;
     background-color: white;
+    display: block;
+}
+
+.transaction-modal .close-button {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+}
+
+.transaction-modal .transaction-dollar-value {
+    font-size: 48px;
+    font-weight: 700;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.transaction-modal .transaction-eth-value {
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Ubuntu', sans-serif;
+    padding-left: 28px;
+}
+
+.transaction-modal .transaction-to-address {
+    padding-left: 4px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.transaction-modal .transaction-to-address .send-icon {
+    margin-right: 8px;
+}
+
+.transaction-modal .transaction-to-address .address-info {
+    font-size: 10px;
+}
+
+.transaction-modal .transaction-timestamp {
+    padding-left: 2px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.transaction-modal .transaction-timestamp .date-icon {
+    margin-right: 10px;
+}
+
+.transaction-modal .transaction-timestamp .timestamp-info {
+    font-size: 10px;
+}
+
+.transaction-modal .transaction-description {
+    padding-left: 2px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.transaction-modal .transaction-description .description-icon {
+    margin-right: 10px;
+}
+
+.transaction-modal .transaction-description .description-info {
+    font-size: 10px;
+}
+
+.transaction-modal .spend-proof {
+    padding-left: 2px;
+    display: flex;
+}
+
+.transaction-modal .spend-proof .spend-icon {
+    margin-right: 10px;
+}
+
+.transaction-modal .spend-proof .image-proof {
+    max-width: 70%;
 }

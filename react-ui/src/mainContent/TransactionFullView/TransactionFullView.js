@@ -48,8 +48,11 @@ class TransactionFullView extends Component {
                         X
                     </button>
 
-                    <div>
-                        <span className="transaction-eth-value">{transaction.eth_value}</span>
+                    <div className="transaction-dollar-value">
+                        {(transaction.eth_value * 126000).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                    </div>
+                    <div className="transaction-eth-value">
+                        ~ {transaction.eth_value}
                     </div>
                     <div>
                         <span className="transaction-to-address">{transaction.to_address}</span>
@@ -89,19 +92,32 @@ class TransactionFullView extends Component {
                         X
                     </button>
 
-                    <div>
-                        <span className="transaction-eth-value">{transaction.eth_value}</span>
+                    <div className="transaction-dollar-value">
+                        {(transaction.eth_value * 126000).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
                     </div>
-                    <div>
-                        <span className="transaction-to-address">{transaction.to_address}</span>
+                    <div className="transaction-eth-value">
+                        ~ {transaction.eth_value * 1000}
                     </div>
-                    <div>
-                        <span className="transaction-timestamp">{transaction.timestamp}</span>
+                    <div className="transaction-to-address">
+                        <div className="send-icon material-icons">send</div>
+                        <div className="address-info">{transaction.to_address}</div>
                     </div>
-                    <div>
-                        <span>{transaction.description}</span>
+                    <div className="transaction-timestamp">
+                        <div className="date-icon material-icons">date_range</div>
+                        <div className="timestamp-info">{transaction.timestamp}</div>
                     </div>
-                        <img src={transaction.proof} alt="Proof of spend" />
+                    <div className="transaction-description">
+                        <div className="description-icon material-icons">chrome_reader_mode</div>
+                        <div className="description-info">{transaction.description}</div>
+                    </div>
+                    <div className="spend-proof">
+                        <div className="spend-icon material-icons">camera_alt</div>
+                        <img
+                            src={transaction.proof}
+                            alt="Proof of spend"
+                            className="image-proof"
+                        />
+                    </div>
                 </div>
             );
         }

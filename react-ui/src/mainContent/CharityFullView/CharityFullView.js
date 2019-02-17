@@ -48,6 +48,7 @@ class CharityFullView extends Component {
                     });
                 }
 
+
                 content = (
                     <Fragment>
                         <div className="charity-balance-container">
