@@ -17,7 +17,7 @@ class App extends Component {
             charityRequestState: 'INIT',
             transactionsRequestState: 'INIT',
             view: 'INTRO', // 'BROWSE', 'YOUR_CHARITY'
-            charityInView: '', //  by ETH Address. If own charity -> switch to 'YOUR_CHARITY' view
+            charityInView: '', //  by chairtyID. If own charity -> switch to 'YOUR_CHARITY' view
             searchTerms: '',
             searchBarOpen: false,
             modalOpen: false
@@ -150,31 +150,41 @@ class App extends Component {
                 break;
         }
 
-        return (
-            <div className="app">
-                <TopNav
-                    view={view}
-                    searchTerms={searchTerms}
-                    searchBarOpen={searchBarOpen}
-                    setSearchBarOpen={this.setSearchBarOpen}
-                    updateSearchTerms={this.updateSearchTerms}
-                />
-                <div
-                    className={
-                        charityInView ?
-                            "main-content"
-                        :
-                            "main-content list"
-                    }
-                >
-                    {content}
-                </div>
-                <BottomNav
-                    view={view}
-                    changeView={this.changeView}
-                />
-            </div>
-        );
+        switch (view) {
+            case 'INTRO':
+                return (
+                    <div className="App">
+                        <div className="Intro" onClick={() => this.setState({ view: 'BROWSE' })}>
+                        </div>
+                    </div>
+                );
+            default:
+                return (
+                    <div className="App">
+                        <TopNav
+                            view={view}
+                            searchTerms={searchTerms}
+                            searchBarOpen={searchBarOpen}
+                            setSearchBarOpen={this.setSearchBarOpen}
+                            updateSearchTerms={this.updateSearchTerms}
+                        />
+                        <div
+                            className={
+                                charityInView ?
+                                    "main-content"
+                                :
+                                    "main-content list"
+                            }
+                        >
+                            {content}
+                        </div>
+                        <BottomNav
+                            view={view}
+                            changeView={this.changeView}
+                        />
+                    </div>
+                );
+        }
     }
 }
 

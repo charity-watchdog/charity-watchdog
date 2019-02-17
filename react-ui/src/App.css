@@ -24,6 +24,14 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.Intro {
+    width: 100wh;
+    height: 100vh;
+    background-image: url('https://images.unsplash.com/photo-1550306269-b597bdc4b65c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=752&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
