@@ -23,8 +23,14 @@ class CharityPreview extends Component {
                 className="charity-preview-container"
                 onClick={this.handleSetCharityInView()}
             >
+                <div
+                    className="charity-preview-image"
+                    style={{
+                        backgroundImage: `url(https://images.unsplash.com/photo-1547014751-009831e5bc73?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)`
+                    }}
+                />
                 <div className="charity-name">{name}</div>
-                <div className="charity-name">{description}</div>
+                <div className="charity-description">{description}</div>
             </div>
         );
     }

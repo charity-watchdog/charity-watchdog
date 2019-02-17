@@ -1,8 +1,39 @@
 .charity-preview-container {
-    padding: 20px 16px 4px;
     margin-bottom: 8px;
     border-radius: 8px;
-    color: #007DAC;
     border: 2px solid #00ADEE;
     box-shadow: 0 10px 20px rgba(0,173,238,0.15), 0 6px 6px rgba(0,173,238,0.15);
+}
+
+.charity-preview-container .charity-preview-image {
+    width: 100%;
+    height: 160px;
+    margin-bottom: 12px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background: no-repeat center center;
+    background-size: cover;
+}
+
+.charity-preview-container .charity-name {
+    width: 100%;
+    padding: 0 8px;
+    margin-bottom: 4px;
+    font-size: 22px;
+    color: #007DAC;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.charity-preview-container .charity-description {
+    width: 100%;
+    padding: 0 8px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }

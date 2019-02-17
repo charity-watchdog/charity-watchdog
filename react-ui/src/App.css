@@ -1,10 +1,134 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:400,500,700');
+
+html {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    color: #323232;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+#root {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.app {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5 {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 700;
+}
+
+button {
+    min-width: 64px;
+    height: 32px;
+    padding: 0 12px;
+    font-size: 14px;
+    line-height: 32px;
+    font-weight: 700;
+    font-family: 'Ubuntu', sans-serif;
+    text-transform: uppercase;
+    background-color: #F2F2F2;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+button.solid.blue {
+    color: white;
+    background-color: #00ADEE;
+    box-shadow: 0 10px 20px rgba(0,173,238,0.15), 0 6px 6px rgba(0,173,238,0.15);
+}
+
+button.solid.white {
+    background-color: white;
+    box-shadow: 0 3px 5px rgba(255,255,255,0.2), 0 6px 6px rgba(255,255,255,0.2);
+}
+
+button.solid.white.blue {
+    background-color: white;
+    color: #007DAC;
+    box-shadow: 0 3px 5px rgba(255,255,255,0.2), 0 6px 6px rgba(255,255,255,0.2);
+}
+
+button.solid.purple {
+    color: white;
+    background-color: #927AC9;
+    box-shadow: 0 10px 20px rgba(146,122,201,0.15), 0 6px 6px rgba(146,122,201,0.15);
+}
+
+button.solid.orange {
+    color: white;
+    background-color: #E7921A;
+    box-shadow: 0 10px 20px rgba(231,146,26,0.15), 0 6px 6px rgba(231,146,26,0.15);
+}
+
+button.large {
+    min-width: 72px;
+    height: 48px;
+    padding: 0 16px;
+    font-size: 18px;
+    line-height: 48px;
+    border-radius: 24px;
+}
+
+input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 4px 8px;
+    margin: 8px 0;
+    border-width: 1px;
+    background: none;
+    color: #323232;
+    border-color: #DDDDDD;
+    border-image: none;
+    border-style: solid;
+    font-size: 20px;
+    line-height: 28px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    border-radius: 6px;
+}
+
+input:focus {
+    outline: none;
+}
+
+
 .main-content {
     width: 100%;
-    height: calc(100% - 128px);
+    height: calc(100% - 104px);
     box-sizing: border-box;
-    padding: 32px 8px;
+    padding: 16px 8px;
     position: absolute;
-    top: 80px;
+    top: 48px;
     left: 0px;
     background-color: #FDFDFD;
     overflow-y: auto;

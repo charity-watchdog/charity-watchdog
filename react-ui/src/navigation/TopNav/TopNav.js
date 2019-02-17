@@ -39,11 +39,9 @@ class TopNav extends Component {
 
         return (
             <div className="top-nav blue">
-                <div className="profile-info-container">
-                    <div className="current-community">Charity Watchdog</div>
-                    <div className="account-navigation-container">
-                        {view === 'BROWSE' && this.renderSearchIcon()}
-                    </div>
+                <div className="logotype">Charity Watchdog</div>
+                <div className="search-container">
+                    {view === 'BROWSE' && this.renderSearchIcon()}
                 </div>
             </div>
         );
