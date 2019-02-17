@@ -4,6 +4,13 @@ import './TransactionFullView.css';
 
 class TransactionFullView extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            submissionButtonPressed: false
+        };
+    }
+
     handleTransactionModalOpen = () => {
         this.props.setTransactionInModal(
             false,
@@ -12,6 +19,12 @@ class TransactionFullView extends Component {
     }
 
     submitProof = () => {
+        if (this.state.submissionButtonPressed) {
+            return;
+        } else {
+            this.setState({ submissionButtonPressed: true });
+        }
+
         const transactionID = this.props.transaction.id;
         const file = this._input.files[0];
         const reader = new FileReader();
@@ -43,6 +56,7 @@ class TransactionFullView extends Component {
                 this.setState({
                     error: `Failed to upload proof: ${e}`,
                     transactionsRequestState: 'ERROR',
+                    submissionButtonPressed: false,
                 });
             });
         }, false);
