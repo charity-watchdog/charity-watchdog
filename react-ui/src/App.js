@@ -111,7 +111,6 @@ class App extends Component {
                             return charity.id === charityID;
                         });
 
-                        web3.currentProvider.enable();
                         web3.eth.getBalance(charity.wallet_address, (error, result) => {
                             if (error) throw error;
                             const updateBalance = web3.fromWei(result.toString(), 'ether');
