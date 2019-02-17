@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './CharityPreview.css';
+import './CharityFullView.css';
 
-class CharityPreview extends Component {
+class CharityFullView extends Component {
     handleSetCharityInView = () => {
         const {
             walletAddress,
@@ -20,7 +20,7 @@ class CharityPreview extends Component {
 
         return (
             <div
-                className="charity-preview-container"
+                className="charity-full-view-container"
                 onClick={this.handleSetCharityInView()}
             >
                 <div className="charity-name">{name}</div>
@@ -30,12 +30,16 @@ class CharityPreview extends Component {
     }
 }
 
-CharityPreview.propTypes = {
-    name: PropTypes.string,
-    description: PropTypes.string,
-    walletAddress: PropTypes.string,
-    missingProof: PropTypes.string,
-    setCharityInView: PropTypes.func
+CharityFullView.propTypes = {
+    tansactions: PropTypes.arrayOf(PropTypes.shape({
+            charity_id: PropTypes.number,
+            to_address: PropTypes.string,
+            description: PropTypes.string,
+            timestamp: PropTypes.string,
+            eth_value: PropTypes.number,
+            proof: PropTypes.string
+        })),
+    transactionsRequestState: PropTypes.string
 };
 
-export default CharityPreview;
+export default CharityFullView;

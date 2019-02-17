@@ -12,7 +12,9 @@ class App extends Component {
         this.state = {
             error: '',
             charities: [],
+            tansactions: [],
             charityRequestState: 'INIT',
+            transactionsRequestState: 'INIT',
             view: 'INTRO', // 'BROWSE', 'YOUR_CHARITY'
             charityInView: '', //  by ETH Address. If own charity -> switch to 'YOUR_CHARITY' view
             searchTerms: '',
@@ -38,7 +40,7 @@ class App extends Component {
     setSearchBarOpen = (searchBarOpen) => { this.setState({ searchBarOpen }); }
 
     componentDidMount() {
-        this.setState({charityRequestState: 'FETCHING' }, () => {
+        this.setState({ charityRequestState: 'FETCHING' }, () => {
             fetch('/api/v1/charity')
             .then(response => {
                 if (!response.ok) {
@@ -82,15 +84,12 @@ class App extends Component {
                 break;
             case 'DONE':
                 if (charityInView) {
-                    // content = (
-                    //     <CharityFullView
-                    //         name={charity.name}
-                    //         description={charity.description}
-                    //         walletAddress={charity.wallet_address}
-                    //         missingProof={charity.missing_proof}
-                    //         setCharityInView={this.setCharityInView}
-                    //     />
-                    // )
+                    content = (
+                        <CharityFullView
+                            tansactions={tansactions}
+                            transactionsRequestState={transactionsRequestState}
+                        />
+                    );
                 } else {
                     content = charities.map((charity) => {
                         return (
