@@ -3,6 +3,7 @@
     border-radius: 8px;
     border: 2px solid #00ADEE;
     box-shadow: 0 10px 20px rgba(0,173,238,0.15), 0 6px 6px rgba(0,173,238,0.15);
+    box-sizing: border-box;
 }
 
 .charity-preview-container .charity-preview-image {

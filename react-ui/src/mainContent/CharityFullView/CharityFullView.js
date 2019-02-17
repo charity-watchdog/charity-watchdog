@@ -49,19 +49,24 @@ class CharityFullView extends Component {
         }
 
         return (
-            <div
-                className="charity-full-view-container"
-            >
-                <button
-                    className="back-button"
-                    onClick={this.handleSetCharityInView}
+            <div className="charity-full-view-container">
+                <div
+                    className="charity-banner"
+                    style={{
+                        backgroundImage: `url(https://images.unsplash.com/photo-1547014751-009831e5bc73?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80)`
+                    }}
                 >
-                    back-button
-                </button>
-                <h1>
+                    <button
+                        className="back-button"
+                        onClick={this.handleSetCharityInView}
+                    >
+                        back
+                    </button>
+                </div>
+                <h1 className="charity-name">
                     {name}
                 </h1>
-                <p>
+                <p className="charity-description">
                     {description}
                 </p>
                 <Fragment>

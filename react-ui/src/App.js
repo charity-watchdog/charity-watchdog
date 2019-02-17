@@ -151,7 +151,7 @@ class App extends Component {
         }
 
         return (
-            <div className="App">
+            <div className="app">
                 <TopNav
                     view={view}
                     searchTerms={searchTerms}
@@ -159,7 +159,14 @@ class App extends Component {
                     setSearchBarOpen={this.setSearchBarOpen}
                     updateSearchTerms={this.updateSearchTerms}
                 />
-                <div className="main-content">
+                <div
+                    className={
+                        charityInView ?
+                            "main-content"
+                        :
+                            "main-content list"
+                    }
+                >
                     {content}
                 </div>
                 <BottomNav

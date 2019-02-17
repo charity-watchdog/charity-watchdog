@@ -44,6 +44,15 @@ h1, h2, h3, h4, h5 {
     margin-inline-end: 0px;
     font-family: 'Ubuntu', sans-serif;
     font-weight: 700;
+    box-sizing: border-box;
+}
+
+p {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    box-sizing: border-box;
 }
 
 button {
@@ -59,6 +68,7 @@ button {
     border: none;
     border-radius: 16px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    box-sizing: border-box;
 }
 
 button.solid.blue {
@@ -82,12 +92,6 @@ button.solid.purple {
     color: white;
     background-color: #927AC9;
     box-shadow: 0 10px 20px rgba(146,122,201,0.15), 0 6px 6px rgba(146,122,201,0.15);
-}
-
-button.solid.orange {
-    color: white;
-    background-color: #E7921A;
-    box-shadow: 0 10px 20px rgba(231,146,26,0.15), 0 6px 6px rgba(231,146,26,0.15);
 }
 
 button.large {
@@ -115,22 +119,27 @@ input {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     border-radius: 6px;
+    box-sizing: border-box;
 }
 
 input:focus {
     outline: none;
 }
 
-
 .main-content {
     width: 100%;
-    height: calc(100% - 104px);
+    height: calc(100% - 120px);
     box-sizing: border-box;
-    padding: 16px 8px;
+    padding: 0 0 16px;
     position: absolute;
     top: 48px;
     left: 0px;
     background-color: #FDFDFD;
     overflow-y: auto;
     overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+.main-content.list {
+    padding: 16px 8px;
 }
