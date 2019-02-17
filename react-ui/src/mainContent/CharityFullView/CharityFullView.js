@@ -17,6 +17,7 @@ class CharityFullView extends Component {
             description,
             walletAddress,
             missingProof,
+            setTransactionInModal
         } = this.props;
         let content;
 
@@ -32,12 +33,14 @@ class CharityFullView extends Component {
                     content = transactions.map((transaction) => {
                         return (
                             <TransactionPreview
+                                key={transaction.id}
                                 transactionID={transaction.id}
                                 toAddress={transaction.to_address}
                                 description={transaction.description}
                                 timestamp={transaction.timestamp}
                                 ethValue={transaction.eth_value}
                                 proof={transaction.proof}
+                                setTransactionInModal={setTransactionInModal}
                             />
                         );
                     });
@@ -106,6 +109,7 @@ CharityFullView.propTypes = {
             })
         ),
     setCharityInView: PropTypes.func,
+    setTransactionInModal: PropTypes.func,
     transactionsRequestState: PropTypes.string,
     logoUrl: PropTypes.string,
     charityID: PropTypes.number,

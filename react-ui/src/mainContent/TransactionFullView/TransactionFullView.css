@@ -1,0 +1,20 @@
+.transaction-modal {
+    width: calc(100% - 16px);
+    height: auto;
+    padding: 0 8px;
+    margin-bottom: 8px;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    border: 2px solid #5E5E5E;
+    color: #5E5E5E;
+    box-shadow: 0 10px 20px rgba(202,202,202,0.35), 0 3px 6px rgba(202,202,202,0.35);
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 110;
+    background-color: white;
+}

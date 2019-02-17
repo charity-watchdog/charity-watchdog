@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 import './TransactionPreview.css';
 
 class TransactionPreview extends Component {
+    handleTransactionModalOpen = () => {
+        this.props.setTransactionInModal(
+            true,
+            this.props.transactionID
+        );
+    }
+
     render() {
         const {
             toAddress,
@@ -18,19 +25,25 @@ class TransactionPreview extends Component {
             { minimumFractionDigits: 2 }
         );
 
+        let ethereumValue = ethValue * 10000;
+        ethereumValue = ethereumValue.toLocaleString(
+            undefined,
+            { minimumFractionDigits: 3 }
+        );
+
         let transactionClass = 'transaction-preview';
-        if (description) {
+        if (!description) {
             transactionClass = 'transaction-preview pink';
         }
 
         return (
             <div
                 className={transactionClass}
-                onClick={() => { console.log('lol'); }}
+                onClick={this.handleTransactionModalOpen}
             >
-                {description && <div className="warning-icon view-icon material-icons">error</div>}
+                {!description && <div className="warning-icon view-icon material-icons">error</div>}
                 <div className="dollar-value">${dollarValue}</div>
-                <div className="eth-value">~{ethValue * 10000} ETH</div>
+                <div className="eth-value">~{ethereumValue} ETH</div>
                 <div className="view-icon material-icons">visibility</div>
             </div>
         );
@@ -44,6 +57,7 @@ TransactionPreview.propTypes = {
     timestamp: PropTypes.string,
     ethValue: PropTypes.string,
     proof: PropTypes.string,
+    setTransactionInModal: PropTypes.func,
 };
 
 export default TransactionPreview;

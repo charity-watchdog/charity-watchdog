@@ -42,7 +42,7 @@ class BottomNav extends Component {
                         <div className="menu-icon material-icons">accessibility_new</div>
                         <div className="menu-title">
                             {view === "YOUR_CHARITY" && <div className="highlight" />}
-                            <div className="title">your charity</div>
+                            <div className="title">my charity</div>
                         </div>
                     </div>
                 </div>

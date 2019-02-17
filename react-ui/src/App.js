@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import TopNav from "./navigation/TopNav/TopNav";
 import CharityPreview from "./mainContent/CharityPreview/CharityPreview";
 import CharityFullView from "./mainContent/CharityFullView/CharityFullView";
+import TransactionFullView from "./mainContent/TransactionFullView/TransactionFullView";
 import BottomNav from "./navigation/BottomNav/BottomNav";
 import Fortmatic from 'fortmatic';
 import Web3 from 'web3';
@@ -25,7 +26,8 @@ class App extends Component {
             charityInView: '', //  by chairtyID. If own charity -> switch to 'YOUR_CHARITY' view
             searchTerms: '',
             searchBarOpen: false,
-            modalOpen: false
+            modalOpen: false,
+            transactionInView: ''
         };
     }
 
@@ -78,6 +80,13 @@ class App extends Component {
 
     setSearchBarOpen = (searchBarOpen) => { this.setState({ searchBarOpen }); }
 
+    setTransactionInModal = (modalOpen, transactionInView) => {
+        this.setState({
+            modalOpen,
+            transactionInView
+        });
+    }
+
     componentDidMount() {
         this.setState({ charityRequestState: 'FETCHING' }, () => {
             fetch('/api/v1/charity')
@@ -115,6 +124,8 @@ class App extends Component {
             charityInView,
             transactions,
             transactionsRequestState,
+            transactionInView,
+            modalOpen
         } = this.state;
         let content;
 
@@ -141,6 +152,7 @@ class App extends Component {
                             description={charity.description}
                             walletAddress={charity.wallet_address}
                             missingProof={charity.missing_proof}
+                            setTransactionInModal={this.setTransactionInModal}
                         />
                     );
                 } else {
@@ -178,6 +190,14 @@ class App extends Component {
             default:
                 return (
                     <div className="App">
+                        {transactionInView && modalOpen &&
+                            <TransactionFullView
+                                transactions={transactions}
+                                transactionInView={transactionInView}
+                                setTransactionInModal={this.setTransactionInModal}
+                            />
+                        }
+                        {transactionInView && modalOpen && <div className="white-overlay" />}
                         <TopNav
                             view={view}
                             searchTerms={searchTerms}
