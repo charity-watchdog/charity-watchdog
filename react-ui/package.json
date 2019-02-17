@@ -1,11 +1,13 @@
 {
   "name": "react-ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
+    "fortmatic": "^0.3.2",
     "react": "^16.6.3",
     "react-dom": "^16.7.0",
-    "react-scripts": "^2.1.2"
+    "react-scripts": "^2.1.2",
+    "web3": "^1.0.0-beta.46"
   },
   "scripts": {
     "start": "react-scripts start",

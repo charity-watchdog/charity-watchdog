@@ -4,6 +4,8 @@ import TopNav from "./navigation/TopNav/TopNav";
 import CharityPreview from "./mainContent/CharityPreview/CharityPreview";
 import CharityFullView from "./mainContent/CharityFullView/CharityFullView";
 import BottomNav from "./navigation/BottomNav/BottomNav";
+import Fortmatic from 'fortmatic';
+import Web3 from 'web3';
 
 import './App.css';
 
@@ -25,6 +27,14 @@ class App extends Component {
     }
 
     changeView = (view) => {
+        if (view === 'YOUR_CHARITY') {
+            const fm = new Fortmatic('pk_live_C4B09BA5D33FB539');
+            const web3 = new Web3(fm.getProvider());
+            fm.user.login().then(() => {
+                web3.eth.getAccounts().then(console.log); // ['0x...']
+            });
+        }
+
         this.setState({
             view,
             searchTerms: '',
@@ -155,6 +165,9 @@ class App extends Component {
                 return (
                     <div className="App">
                         <div className="Intro" onClick={() => this.setState({ view: 'BROWSE' })}>
+                            <h1>100%</h1>
+                            <h2>transparent</h2>
+                            <h2>charities</h2>
                         </div>
                     </div>
                 );
