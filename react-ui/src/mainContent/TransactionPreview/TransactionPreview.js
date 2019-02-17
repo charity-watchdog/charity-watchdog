@@ -24,7 +24,10 @@ class TransactionPreview extends Component {
         }
 
         return (
-            <div className={transactionClass}>
+            <div
+                className={transactionClass}
+                onClick={() => { console.log('lol'); }}
+            >
                 {description && <div className="warning-icon view-icon material-icons">error</div>}
                 <div className="dollar-value">${dollarValue}</div>
                 <div className="eth-value">~{ethValue * 10000} ETH</div>
