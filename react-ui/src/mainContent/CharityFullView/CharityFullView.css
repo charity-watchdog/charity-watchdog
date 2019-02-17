@@ -33,3 +33,17 @@
     white-space: nowrap;
     overflow: hidden;
 }
+
+.charity-full-view-container .charity-balance-container {
+    padding: 0 8px;
+}
+
+.charity-full-view-container .section-description {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.charity-balance-container .amount-container {
+    display: flex;
+    justify-content: space-between;
+}

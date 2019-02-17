@@ -69,6 +69,14 @@ class CharityFullView extends Component {
                 <p className="charity-description">
                     {description}
                 </p>
+                <div className="charity-balance-container">
+                    <div className="section-description">balance</div>
+                    <div className="amount-container">
+                        <div className="balance-amount">$3.45</div>
+                        <button className="solid blue">donate</button>
+                    </div>
+                    <div className="balance-in-eth">~ 0.344 ETH</div>
+                </div>
                 <Fragment>
                     {content}
                 </Fragment>
