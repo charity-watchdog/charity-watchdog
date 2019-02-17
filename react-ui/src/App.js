@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
 import TopNav from "./navigation/TopNav/TopNav";
-import MainContent from "./mainContent/MainContent/MainContent";
 import CharityPreview from "./mainContent/CharityPreview/CharityPreview";
 import BottomNav from "./navigation/BottomNav/BottomNav";
+
+import './App.css';
 
 class App extends Component {
     constructor(props) {
@@ -69,7 +70,8 @@ class App extends Component {
             error,
             view,
             searchTerms,
-            searchBarOpen
+            searchBarOpen,
+            charityInView
         } = this.state;
         let content;
 
@@ -79,22 +81,29 @@ class App extends Component {
                 content = (<p>Loading...</p>);
                 break;
             case 'DONE':
-                content = charities.map((charity) => {
-                    // name
-                    // description
-                    // wallet_address
-                    // missing_proof
-                    // return <p>{charity.name} <strong>{charity.}</strong></p>;
-                    return (
-                        <CharityPreview
-                            name={charity.name}
-                            description={charity.description}
-                            walletAddress={charity.wallet_address}
-                            missingProof={charity.missing_proof}
-                            setCharityInView={this.setCharityInView}
-                        />
-                    );
-                });
+                if (charityInView) {
+                    // content = (
+                    //     <CharityFullView
+                    //         name={charity.name}
+                    //         description={charity.description}
+                    //         walletAddress={charity.wallet_address}
+                    //         missingProof={charity.missing_proof}
+                    //         setCharityInView={this.setCharityInView}
+                    //     />
+                    // )
+                } else {
+                    content = charities.map((charity) => {
+                        return (
+                            <CharityPreview
+                                name={charity.name}
+                                description={charity.description}
+                                walletAddress={charity.wallet_address}
+                                missingProof={charity.missing_proof}
+                                setCharityInView={this.setCharityInView}
+                            />
+                        );
+                    });
+                }
                 break;
             case 'ERROR':
                 content = (<p>{error}</p>);
@@ -113,11 +122,9 @@ class App extends Component {
                     setSearchBarOpen={this.setSearchBarOpen}
                     updateSearchTerms={this.updateSearchTerms}
                 />
-                <MainContent
-                    view={view}
-                    changeView={this.changeView}
-                    content={content}
-                />
+                <div className="main-content">
+                    {content}
+                </div>
                 <BottomNav
                     view={view}
                     changeView={this.changeView}

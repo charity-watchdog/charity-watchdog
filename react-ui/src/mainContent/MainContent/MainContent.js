@@ -3,36 +3,33 @@ import PropTypes from 'prop-types';
 import './MainContent.css';
 
 class MainContent extends Component {
-    // renderCurrentView = () => {
-    //     const {
-    //         view
-    //     } = this.props;
-    //
-    //     switch (view) {
-    //         case 'BROWSE':
-    //             return <Balance />;
-    //         case 'YOUR_CHARITY':
-    //             return <CharityFullView />
-    //         case 'Search':
-    //             return <Search />
-    //         case 'Activation Requests':
-    //             return <ActivationRequests />
-    //         default:
-    //             return <div>Something is broken</div>;
-    //     }
-    // }
-
     render() {
-        return (
+        const {
+            charityInView
+        } = this.props;
+
+        let toRender = (
             <div className="main-content">
                 {this.props.content}
             </div>
         );
+
+        if (charityInView) {
+            toRender = (
+                <div className="main-content">
+                    {this.props.content}
+                </div>
+            );
+        }
+
+        return toRender;
     }
 }
 
 MainContent.propTypes = {
     view: PropTypes.string,
+    charityInView: PropTypes.string,
+    changeView: PropTypes.func,
     content: PropTypes.element
 
 };

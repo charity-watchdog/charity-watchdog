@@ -1,0 +1,8 @@
+.charity-preview-container {
+    padding: 20px 16px 4px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    color: #007DAC;
+    border: 2px solid #00ADEE;
+    box-shadow: 0 10px 20px rgba(0,173,238,0.15), 0 6px 6px rgba(0,173,238,0.15);
+}
