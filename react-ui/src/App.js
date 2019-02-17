@@ -4,8 +4,13 @@ import TopNav from "./navigation/TopNav/TopNav";
 import CharityPreview from "./mainContent/CharityPreview/CharityPreview";
 import CharityFullView from "./mainContent/CharityFullView/CharityFullView";
 import BottomNav from "./navigation/BottomNav/BottomNav";
+import Fortmatic from 'fortmatic';
+import Web3 from 'web3';
 
 import './App.css';
+
+const fm = new Fortmatic('pk_live_C4B09BA5D33FB539');
+const web3 = new Web3(fm.getProvider());
 
 class App extends Component {
     constructor(props) {
@@ -17,7 +22,7 @@ class App extends Component {
             charityRequestState: 'INIT',
             transactionsRequestState: 'INIT',
             view: 'INTRO', // 'BROWSE', 'YOUR_CHARITY'
-            charityInView: '', //  by ETH Address. If own charity -> switch to 'YOUR_CHARITY' view
+            charityInView: '', //  by chairtyID. If own charity -> switch to 'YOUR_CHARITY' view
             searchTerms: '',
             searchBarOpen: false,
             modalOpen: false
@@ -25,6 +30,15 @@ class App extends Component {
     }
 
     changeView = (view) => {
+        if (view === 'YOUR_CHARITY') {
+            web3.currentProvider.enable();
+            web3.eth.getAccounts((error, accounts) => {
+                if (error) throw error;
+                alert(accounts[0]);
+                console.log(accounts); // ['0x...']
+            });
+        }
+
         this.setState({
             view,
             searchTerms: '',
@@ -150,31 +164,44 @@ class App extends Component {
                 break;
         }
 
-        return (
-            <div className="app">
-                <TopNav
-                    view={view}
-                    searchTerms={searchTerms}
-                    searchBarOpen={searchBarOpen}
-                    setSearchBarOpen={this.setSearchBarOpen}
-                    updateSearchTerms={this.updateSearchTerms}
-                />
-                <div
-                    className={
-                        charityInView ?
-                            "main-content"
-                        :
-                            "main-content list"
-                    }
-                >
-                    {content}
-                </div>
-                <BottomNav
-                    view={view}
-                    changeView={this.changeView}
-                />
-            </div>
-        );
+        switch (view) {
+            case 'INTRO':
+                return (
+                    <div className="App">
+                        <div className="Intro" onClick={() => this.setState({ view: 'BROWSE' })}>
+                            <h1>100%</h1>
+                            <h2>transparent</h2>
+                            <h2>charities</h2>
+                        </div>
+                    </div>
+                );
+            default:
+                return (
+                    <div className="App">
+                        <TopNav
+                            view={view}
+                            searchTerms={searchTerms}
+                            searchBarOpen={searchBarOpen}
+                            setSearchBarOpen={this.setSearchBarOpen}
+                            updateSearchTerms={this.updateSearchTerms}
+                        />
+                        <div
+                            className={
+                                charityInView ?
+                                    "main-content"
+                                :
+                                    "main-content list"
+                            }
+                        >
+                            {content}
+                        </div>
+                        <BottomNav
+                            view={view}
+                            changeView={this.changeView}
+                        />
+                    </div>
+                );
+        }
     }
 }
 
