@@ -65,7 +65,7 @@ if (!isDev && cluster.isMaster) {
         res.set('Content-Type', 'application/json');
 
         pool.query(
-            'SELECT id, to_address, timestamp, description, eth_value, proof FROM transactions WHERE charity_id = $1',
+            'SELECT id, to_address, timestamp, description, eth_value, proof FROM transactions WHERE charity_id = $1 ORDER BY id DESC',
             [ req.params.charityID ],
             (err, queryRes) => {
                 if (err) {
