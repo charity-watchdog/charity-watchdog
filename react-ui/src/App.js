@@ -229,12 +229,16 @@ class App extends Component {
                     </div>
                 );
             default:
+                const { myCharityID, charityInView } = this.state;
+
                 return (
                     <div className="App">
                         {transactionInView && modalOpen &&
                             <TransactionFullView
-                                transactions={transactions}
-                                transactionInView={transactionInView}
+                                transaction={transactions.find((transaction) => {
+                                    return transaction.id === transactionInView;
+                                })}
+                                ownTransaction={ myCharityID !== -1 && charityInView && myCharityID === charityInView }
                                 setTransactionInModal={this.setTransactionInModal}
                             />
                         }
