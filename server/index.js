@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const { Pool } = require('pg');
 const { execSync } = require('child_process');
 const Meerkat = require('./meerkat');
+const bodyParser = require('body-parser');
 
 const isDev = process.env.NODE_ENV !== 'production';
 const PORT = process.env.PORT || 5000;
@@ -28,6 +29,9 @@ if (!isDev && cluster.isMaster) {
 
 } else {
   const app = express();
+
+  app.use(bodyParser.json()); // for parsing application/json
+  app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
   // Attach a logging middleware
   app.use(morgan('tiny'));

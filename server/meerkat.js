@@ -17,8 +17,8 @@ const createAddressSubscription = (address) => {
   });
 }
 
-const deleteAddressSubscription = (address) => {
-  return fetch(`https://meerkat.watch/api/v0/enterprise/unsubscribe/address/${address}`, {
+const deleteAddressSubscription = (subscriptionID) => {
+  return fetch(`https://meerkat.watch/api/v0/enterprise/unsubscribe/address/${subscriptionID}`, {
     method: "DELETE",
     headers: {
       "Authorization": `ApiKey ${meerkatAPIKey}`,
