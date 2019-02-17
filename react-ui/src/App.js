@@ -27,7 +27,8 @@ class App extends Component {
             searchTerms: '',
             searchBarOpen: false,
             modalOpen: false,
-            transactionInView: ''
+            myCharityID: -1,
+            transactionInView: '',
         };
     }
 
@@ -44,13 +45,20 @@ class App extends Component {
                         return charity.wallet_address === accountAddress
                     });
 
+                    this.setState({
+                        myCharityID: myCharity.id,
+                        view,
+                        searchTerms: '',
+                        searchBarOpen: false,
+                    });
                     this.setCharityInView(myCharity.id);
                 } else {
                     this.setState({
                         view,
                         searchTerms: '',
                         searchBarOpen: false,
-                        setCharityInView: ''
+                        setCharityInView: '',
+                        myCharityID: -1,
                     });
                 }
             });
@@ -59,7 +67,8 @@ class App extends Component {
                 view,
                 searchTerms: '',
                 searchBarOpen: false,
-                setCharityInView: ''
+                setCharityInView: '',
+                myCharityID: -1,
             });
         }
     }
