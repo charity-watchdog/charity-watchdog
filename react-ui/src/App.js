@@ -52,7 +52,6 @@ class App extends Component {
                 if (error) throw error;
                 const accountAddress = accounts[0]
                 console.log(accountAddress); // ['0x...']
-                prompt('Copy your Fortmatic wallet address', accountAddress);
 
                 if (0 < this.state.charities.length) {
                     const myCharity = this.state.charities.find((charity) => {
