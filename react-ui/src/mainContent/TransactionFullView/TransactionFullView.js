@@ -155,7 +155,7 @@ class TransactionFullView extends Component {
                         <div className="spend-icon material-icons">camera_alt</div>
                         <img
                             src={transaction.proof}
-                            alt="Proof of spend"
+                            alt="No proof provided"
                             className="image-proof"
                             width="100%"
                         />
