@@ -30,8 +30,8 @@ if (!isDev && cluster.isMaster) {
 } else {
     const app = express();
 
-    app.use(bodyParser.json()); // for parsing application/json
-    app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+    app.use(bodyParser.json({ limit: '5mb' })); // for parsing application/json
+    app.use(bodyParser.urlencoded({ limit: '5mb', extended: true })); // for parsing application/x-www-form-urlencoded
 
     // Attach a logging middleware
     app.use(morgan('tiny'));
