@@ -1,6 +1,7 @@
-# Charity Watchdog
+# Charity Watchdog (ETH Denver Hackathon 2019 Submission)
 
-Using the Ethereum network to bring transparency and accountability to charity spends.
+Please note that this app was developed specifically for ETH Denver hackathon.
+Goal: Using the Ethereum network to bring transparency and accountability to charity spends.
 
 ## Local Development
 
